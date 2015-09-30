@@ -1,0 +1,236 @@
+<?php  if(isset($_SESSION["nom_se"])){ ?>
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Instituto de Informatica Thomas Alva Edison</title>
+        <meta http-equiv="refresh" content="1000" />
+        <meta name="description" content="Instituto De Informatica Thomas Alva Edison" />
+        <meta name="keywords" content="iitae, informatica, diseño, word, excel, acces, corel draw, php" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        <link rel="stylesheet" href="<?php echo Conectar::ruta();?>script/css/estilo.css" type="text/css" />
+          
+          
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/style.css" />
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery.min.js" ></script>
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery-ui.min.js" ></script>
+            <script type="text/javascript">
+            	$(document).ready(function(){
+            		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 7000, true);
+            	});
+            </script>
+        
+                <!--[if lt IE 9]>
+                    <script>
+                    var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+                    "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+                    "progress,section,time,video").split(',');
+                    for (var i = 0; i < e.length; i++) {
+                    document.createElement(e[i]);
+                    }
+                    </script>
+               <![endif]-->
+        
+    </head>
+    
+    <body>
+        <div id="principal">
+            <section>
+                 <header>
+                    <?php include("headersecretaria.phtml"); ?>
+                 </header>
+                  
+                  <nav>
+                    <?php  $menu=1; include("menu_secretaria.phtml");?>
+                  </nav>
+                  
+                  <section id="intro"> 
+                  
+                         <aside id="asideizquierdoadg">
+
+                            <h5 id="tituloesiz">Expediente</h5>
+                                 <div id="contiz1">
+                                 <a href="<?php echo Conectar::ruta(); ?>c-sini/v-6/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/User-Male.png" border="0" alt="Usuario" width="48" height="48" title="Consultar mis datos" />
+                                  </a>  
+                                 </div>
+
+                     </aside>
+                       </aside>
+                       
+                       <?php if($e==0){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnaiz">
+                            <h5 id="tituloes">&nbsp;Ahora mismo</h5>
+                              
+                                    <div id="culumnaiz1">&nbsp;Contenido<br />
+                                        <div class="textocontenido">
+                                            &nbsp;1 Entrada
+                                        </div>
+                                    
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?> 
+                       
+                       <?php if($e==1){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO GRUPOS</h4>
+                             <div id="centro1">
+                                        <table align="center" width="800" >
+                                        <tr>
+                                            <th>Folio</th><th>D&iacute;a</th><th>Horario</th><th>Aula</th><th>Laboratorio</th><th>H.Laboratorio</th><th>Estado</th><th align="center">Acciones</th>
+                                        </tr>
+                                        <?php for($i=0;$i<sizeof($consultadia); $i++){ ?>
+                                        <tr>
+                                            <td><?php echo $consultadia[$i]["cve_grupo"];?></td>
+                                            <td><?php echo $consultadia[$i]["dia"];?></td>
+                                            <td><?php echo $consultadia[$i]["nom_hora"];?></td>
+                                            <td><?php echo $consultadia[$i]["nombre_au"];?> Edif. <?php echo $consultadia[$i]["edificio_au"];?> </td>
+                                            <td><?php echo $consultadia[$i]["nombre_lab"];?></td>
+                                            <td><?php echo $consultadia[$i]["horario_ini"]; echo " - "; echo $consultadia[$i]["horario_fin"];?></td>
+                                            <td><?php if($consultadia[$i]["estado"]==1){echo "Abierto";}else{echo "Cerrado";}?>    </td>
+                                            <td align="center">
+                                                <form method="POST" action="">
+                                                <input type="image" value="<?php echo $consultadia[$i]["cve_grupo"];?>"  src="<?php echo Conectar::ruta();?>/images/iconos_sistema/actualizar_nota.png"  alt="ver_grupo" title="Agregar Calificacion" />
+                                                <input type="hidden" name="v" />
+                                                <input type="hidden" name="cve_gpo" value="<?php echo $consultadia[$i]["cve_grupo"];?>" />
+                                                </form>
+                                                
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                        </table>
+                                    <?php if(isset($_POST["v"])) {
+                                        $conal=$oalumno->consulta_a_gpo();    
+                                        
+                                    ?>
+                                    <form name="cal" method="POST" action="">
+                                    <table width="800" style="border-width: medium;">
+                                        <tr style="background: #E9E9E9;">
+                                            <th>No</th><th>N.C</th><th>Nombre</th><th>Apellidos</th><th>Asis</th>
+                                            <th colspan="2">Windows</th> 
+                                            <th colspan="2">Word</th>
+                                            <th colspan="2">Power</th>
+                                            <th colspan="2">Excel</th>
+                                            <th colspan="2">Internet</th>
+                                            <th colspan="2">Acces</th>
+                                        </tr>
+                                        <?php for($j=0;$j<sizeof($conal); $j++){
+                                            
+                                        ?>
+                                        <tr <?php if($conal[$j]["asistencia"]==0){ ?>  style="color: red;"<?php } ?> >
+                                            <td><?php echo $j+1; ?></td>
+                                            <td><?php echo $conal[$j]["matricula"]; ?> <input type="hidden" name="nc[]" value="<?php echo $conal[$j]["matricula"]; ?>" /></td>
+                                            <td><?php echo $conal[$j]["nombre_alum"]; ?></td>
+                                            <td><?php echo $conal[$j]["apellidos_al"]; ?></td>
+                                            <td><?php if($conal[$j]["asistencia"]==1){ echo "Activo"; }else{ echo "Faltante"; } ?></td>
+                                            <th><input type="text" name="wi1[]" value="<?php  echo $conal[$j]["wind1"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="wi2[]" value="<?php  echo $conal[$j]["wind2"]; ?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="wo1[]" value="<?php  echo $conal[$j]["wor1"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="wo2[]" value="<?php  echo $conal[$j]["wor2"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="po1[]" value="<?php  echo $conal[$j]["pow1"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="po2[]" value="<?php  echo $conal[$j]["pow2"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="e1[]" value="<?php  echo $conal[$j]["ex1"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="e2[]" value="<?php  echo $conal[$j]["ex2"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="in1[]" value="<?php  echo $conal[$j]["in1"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="in2[]" value="<?php  echo $conal[$j]["in2"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="a1[]" value="<?php  echo $conal[$j]["ac1"];?>" size="1" maxlength="2" /></th>
+                                            <th><input type="text" name="a2[]" value="<?php  echo $conal[$j]["ac2"];?>" size="1" maxlength="2" /></th>
+                                        </tr>
+                                        <?php } ?>
+                                        <tr>
+                                        <td colspan="17">
+                                            <input type="hidden" name="ccali" />
+                                            <input type="submit" value="Gargar" />
+                                        </td></tr>
+                                    </table>
+                                    </form>
+                                    <?php } ?>
+                                    </div>
+                         </div>
+                       </article>
+                       <?php  }  ?> 
+                       
+                       
+                                                                    
+                       
+                       <?php if($e==6){  ?>
+                       
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Consultas Espesificas de secretaria</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                    <form method="POST" action="" name="alsecretaria">
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Datos Personales</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                     <img src="<?php echo Conectar::ruta();?>script/foto_usuarios/avatar/<?php echo $consulta_es[0]["nom_foto_av"]; ?>" border="0" alt="avatar" title="Avatar" width="100" height="80" /></a>             
+                                                &nbsp; Solo Campos Marcados con * se pueden modificar!
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nombre:&nbsp;<input type="text" name="nombre" readonly="" value="<?php echo $consulta_es[0]["nombre_usu"]; ?>" /> &nbsp;&nbsp;&nbsp;
+                                                Apellidos:&nbsp;<input type="text" name="aps" readonly="" size="30" value="<?php echo $consulta_es[0]["apellidos_usu"]; ?>" />
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>Direccion:&nbsp; <input type="text" name="dire" size="67"  value="<?php echo $consulta_es[0]["direccion_usu"]; ?>" />* &nbsp;&nbsp;&nbsp;
+                                                </td>
+                                            </tr>
+                                             <tr><td>
+                                               Telefono:&nbsp;<input type="text" name="tel"  value="<?php echo $consulta_es[0]["telefono_usu"]; ?>" />*
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>Correo Electronico:&nbsp;<input type="text" name="correo" size="30"  value="<?php echo $consulta_es[0]["correo"]; ?>" />* &nbsp;&nbsp;&nbsp;
+                                                Sexo:&nbsp;<input type="text" name="sexo" readonly="" size="13" value="<?php echo $consulta_es[0]["sexo_usu"]; ?>" />                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carrera:&nbsp;<input type="text" name="carrera" readonly="" value="<?php echo $consulta_es[0]["carrera"]; ?>" /> &nbsp;&nbsp;&nbsp;
+                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                 <td>
+                                                 <input type="hidden" name="acm" />
+                                                 <input type="hidden" value="<?php echo $consulta_es[0]["cve_maes"];  ?>" name="cve" />
+                                                 </td>
+                                            </tr>
+                                        </table>
+                                     </form>       
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                       
+                       <?php } ?>
+                                                                     
+                       
+                   
+                  </section>
+            </section>
+        
+        </div>
+        <footer>
+            <?php
+                include("footer.phtml");
+             ?>
+        </footer>
+        
+        
+    </body>
+</html>
+<?php } else{ header("location:".Conectar::ruta()."c-home/"); }?>

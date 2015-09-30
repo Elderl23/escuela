@@ -1,0 +1,461 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jan 07, 2013 at 03:28 PM
+-- Server version: 5.5.25a
+-- PHP Version: 5.4.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `iitae`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `cve_dire` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_dire` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos_dire` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `login_dire` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `pass_dire` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_dire`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`cve_dire`, `nombre_dire`, `apellidos_dire`, `login_dire`, `pass_dire`) VALUES
+(1, 'José', 'Peralta Gutierrez', 'iitae', '2012');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumnos`
+--
+
+CREATE TABLE IF NOT EXISTS `alumnos` (
+  `cve_alum` int(11) NOT NULL AUTO_INCREMENT,
+  `matricula` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_alum` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos_al` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `sexo_al` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `edad_al` int(11) NOT NULL,
+  `curp_al` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `nacademico_al` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `tutor_al` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `tel_al` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `obser_al` text COLLATE utf8_spanish_ci NOT NULL,
+  `calle_al` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `num_al` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `col_al` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `estado_al` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `muni_al` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `cve_usu` int(11) NOT NULL,
+  `cve_grupo` int(11) NOT NULL,
+  `acn_al` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `cone` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `fto` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `semana` int(11) NOT NULL,
+  `login_al` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `pass_al` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `avatar_al` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `asistencia` int(11) NOT NULL,
+  `status_al` int(11) NOT NULL,
+  PRIMARY KEY (`cve_alum`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `alumnos`
+--
+
+INSERT INTO `alumnos` (`cve_alum`, `matricula`, `nombre_alum`, `apellidos_al`, `sexo_al`, `edad_al`, `curp_al`, `nacademico_al`, `tutor_al`, `tel_al`, `obser_al`, `calle_al`, `num_al`, `col_al`, `estado_al`, `muni_al`, `cve_usu`, `cve_grupo`, `acn_al`, `cone`, `fto`, `fecha`, `semana`, `login_al`, `pass_al`, `avatar_al`, `asistencia`, `status_al`) VALUES
+(1, '12E01', 'Ana Rosa', 'Lopez Mateo', 'Femenino', 18, 'LOMA940311MTCPTN08', 'Preparatoria', 'Felipe Lopez Gutierrez', '9931592589', 'asas', 'Cerrada Tulipan', '0', 'Cedro nacajuca', 'Tabasco', 'Centro', 3, 1, 's', 's', 'n', '2012-12-16', 51, '12E01', '0000', '1_Avatar.jpg', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aulas`
+--
+
+CREATE TABLE IF NOT EXISTS `aulas` (
+  `cve_au` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_au` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `edificio_au` int(11) NOT NULL,
+  `capacidad_au` int(11) NOT NULL,
+  PRIMARY KEY (`cve_au`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `aulas`
+--
+
+INSERT INTO `aulas` (`cve_au`, `nombre_au`, `edificio_au`, `capacidad_au`) VALUES
+(1, 'A1', 1, 15),
+(2, 'A2', 1, 15),
+(3, 'A3', 1, 15),
+(4, 'A4', 1, 13),
+(5, 'A5', 1, 25),
+(6, 'A6', 1, 25),
+(7, 'A7', 2, 25),
+(8, 'A8', 2, 25),
+(9, 'A9', 2, 10),
+(10, 'A10', 2, 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `avatar`
+--
+
+CREATE TABLE IF NOT EXISTS `avatar` (
+  `cve_av` int(11) NOT NULL AUTO_INCREMENT,
+  `cve_usu` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `nom_foto_av` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_av`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `avatar`
+--
+
+INSERT INTO `avatar` (`cve_av`, `cve_usu`, `nom_foto_av`) VALUES
+(4, '1', '1_Avatar.jpg'),
+(5, '2', '2_Avatar.jpg'),
+(6, '3', '3_Avatar.jpg'),
+(7, '5', '5_Avatar.jpg'),
+(8, '6', '6_Avatar.jpg'),
+(9, '4', '4_Avatar.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `calificacion`
+--
+
+CREATE TABLE IF NOT EXISTS `calificacion` (
+  `cve_cali` int(11) NOT NULL AUTO_INCREMENT,
+  `cve_alum` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
+  `cve_grupo` int(11) NOT NULL,
+  `wind1` int(11) NOT NULL,
+  `wind2` int(11) NOT NULL,
+  `wor1` int(11) NOT NULL,
+  `wor2` int(11) NOT NULL,
+  `pow1` int(11) NOT NULL,
+  `pow2` int(11) NOT NULL,
+  `ex1` int(11) NOT NULL,
+  `ex2` int(11) NOT NULL,
+  `in1` int(11) NOT NULL,
+  `in2` int(11) NOT NULL,
+  `ac1` int(11) NOT NULL,
+  `ac2` int(11) NOT NULL,
+  PRIMARY KEY (`cve_cali`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `calificacion`
+--
+
+INSERT INTO `calificacion` (`cve_cali`, `cve_alum`, `cve_grupo`, `wind1`, `wind2`, `wor1`, `wor2`, `pow1`, `pow2`, `ex1`, `ex2`, `in1`, `in2`, `ac1`, `ac2`) VALUES
+(1, '12E01', 1, 9, 9, 9, 10, 10, 9, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cat_user`
+--
+
+CREATE TABLE IF NOT EXISTS `cat_user` (
+  `cve_cat_user` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_cat` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_cat_user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `cat_user`
+--
+
+INSERT INTO `cat_user` (`cve_cat_user`, `nombre_cat`) VALUES
+(1, 'Secretaria'),
+(2, 'Intendente'),
+(3, 'Promotor');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `director`
+--
+
+CREATE TABLE IF NOT EXISTS `director` (
+  `cve_director` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_dire` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos_dire` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `login` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `pass` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_director`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `director`
+--
+
+INSERT INTO `director` (`cve_director`, `nombre_dire`, `apellidos_dire`, `login`, `pass`) VALUES
+(1, 'Jose ', 'Barrientos Gonzalez', 'iitae', '2012');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grupo`
+--
+
+CREATE TABLE IF NOT EXISTS `grupo` (
+  `cve_grupo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_grupo` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `cve_maes` int(11) NOT NULL,
+  `cve_hora` int(11) NOT NULL,
+  `cve_aula` int(11) NOT NULL,
+  `cve_lab` int(11) NOT NULL,
+  `cve_horarios_lab` int(11) NOT NULL,
+  `dia` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` int(11) NOT NULL,
+  `status_gpo` int(11) NOT NULL,
+  `fecha_gpo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_grupo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `grupo`
+--
+
+INSERT INTO `grupo` (`cve_grupo`, `nombre_grupo`, `cve_maes`, `cve_hora`, `cve_aula`, `cve_lab`, `cve_horarios_lab`, `dia`, `estado`, `status_gpo`, `fecha_gpo`) VALUES
+(1, 'Gpo1', 4, 2, 8, 2, 2, 'Domingo', 1, 1, '10-06-2012');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hora`
+--
+
+CREATE TABLE IF NOT EXISTS `hora` (
+  `cve_hora` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_hora` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_hora`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `hora`
+--
+
+INSERT INTO `hora` (`cve_hora`, `nom_hora`) VALUES
+(1, '07-11'),
+(2, '08-12'),
+(3, '09-01'),
+(4, '10-02'),
+(5, '11-03'),
+(6, '12-04'),
+(7, '01-05'),
+(8, '02-06'),
+(9, '03-07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hora2`
+--
+
+CREATE TABLE IF NOT EXISTS `hora2` (
+  `cve_hora2` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_hora2` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_hora2`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `hora2`
+--
+
+INSERT INTO `hora2` (`cve_hora2`, `nom_hora2`) VALUES
+(2, '08-12'),
+(3, '09-01'),
+(9, '03-07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `horarios_lab`
+--
+
+CREATE TABLE IF NOT EXISTS `horarios_lab` (
+  `cve_horarios_lab` int(11) NOT NULL AUTO_INCREMENT,
+  `horario_ini` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `horario_fin` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `dia_horario_lab` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_horarios_lab`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `horarios_lab`
+--
+
+INSERT INTO `horarios_lab` (`cve_horarios_lab`, `horario_ini`, `horario_fin`, `dia_horario_lab`) VALUES
+(1, '07:00', '08:30', 'sd'),
+(2, '08:30', '10:00', 'sd'),
+(3, '10:00', '11:30', 'sd'),
+(4, '11:30', '01:00', 'sd'),
+(5, '01:00', '02:30', 'sd'),
+(6, '02:30', '04:00', 'sd'),
+(7, '04:00', '05:30', 'sd'),
+(8, '05:30', '07:00', 'sd'),
+(9, ' 07:00', '08:30', 'lv'),
+(10, '08:30', '10:00', 'lv'),
+(11, '10:00', '11:30', 'lv'),
+(12, '11:30', '01:00', 'lv'),
+(13, '03:00', '04:30', 'lv'),
+(14, '04:30', '6:00', 'lv');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laboratorios`
+--
+
+CREATE TABLE IF NOT EXISTS `laboratorios` (
+  `cve_lab` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_lab` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `capacidad_lab` int(11) NOT NULL,
+  PRIMARY KEY (`cve_lab`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `laboratorios`
+--
+
+INSERT INTO `laboratorios` (`cve_lab`, `nombre_lab`, `capacidad_lab`) VALUES
+(1, 'Laboratorio  "1"', 25),
+(2, 'Laboratorio  "2"', 15),
+(3, 'Laboratorio  "3"', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `maestros`
+--
+
+CREATE TABLE IF NOT EXISTS `maestros` (
+  `cve_maes` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_maes` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_maes` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `direccion_maes` text COLLATE utf8_spanish_ci NOT NULL,
+  `telefono_maes` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `correo_maes` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `sexo_maes` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `carrera_maes` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `cedula_maes` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `login_maes` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `pass_maes` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `avatar_maes` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `status_maes` int(11) NOT NULL,
+  PRIMARY KEY (`cve_maes`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `maestros`
+--
+
+INSERT INTO `maestros` (`cve_maes`, `nombre_maes`, `apellido_maes`, `direccion_maes`, `telefono_maes`, `correo_maes`, `sexo_maes`, `carrera_maes`, `cedula_maes`, `login_maes`, `pass_maes`, `avatar_maes`, `status_maes`) VALUES
+(1, 'Ruben', 'Cruz Gallardo', 'Macuspana Tabasco Mexico', '1212', 'ruben@hotmail.com', 'Masculino', 'ing.sistemas', 'dfef4f', 'ruben', '23', '1_Avatar.jpg', 1),
+(2, 'Angel', 'Chico Pozo', 'Villahermosa', '234234234332', 'chico_p@hotmail.com', 'Masculino', 'Lic. En Informatica', '23eedr44', 'chico', '23', '0', 1),
+(3, 'Diana Tamar', 'Arzat Alamilla', 'Pob. El Congo Macuspana Tabasco', '98765432339', 'chivas_amor:_tauro@hotmail.com', 'Femenino', 'Lic. En Informatica', '2RDSFT534', 'tamar', '23', '3_Avatar.jpg', 0),
+(4, 'Elder', 'Lopez Felix', 'Pob. El Congo Macuspana Tabasco', '9361113001', 'sistemaed@gmail.com', 'Masculino', 'ing.sistemas', 'w23edee', 'sistemaed', 'tamar23', '4_Avatar.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `practicas`
+--
+
+CREATE TABLE IF NOT EXISTS `practicas` (
+  `cve_practica` int(11) NOT NULL AUTO_INCREMENT,
+  `cve_maes` int(11) NOT NULL,
+  `imagen_practica` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `archivo_practica` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_practica` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion_practica` text COLLATE utf8_spanish_ci NOT NULL,
+  `cve_grupo` int(11) NOT NULL,
+  `estatus_p` int(11) NOT NULL,
+  PRIMARY KEY (`cve_practica`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `practicas`
+--
+
+INSERT INTO `practicas` (`cve_practica`, `cve_maes`, `imagen_practica`, `archivo_practica`, `fecha_practica`, `descripcion_practica`, `cve_grupo`, `estatus_p`) VALUES
+(5, 4, 'logo.png', '', 'Sabado, 15 de Diciembre de 2012', 'sdsdsd', 4, 0),
+(6, 4, 'tienda2.jpg', '', 'Domingo, 30 de Diciembre de 2012', 'todo sobre las practicas nototrias', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `practicas_realizadas`
+--
+
+CREATE TABLE IF NOT EXISTS `practicas_realizadas` (
+  `cve_practicas_realizadas` int(11) NOT NULL AUTO_INCREMENT,
+  `cve_practica` int(11) NOT NULL,
+  `nom_archivo` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
+  `cve_alum` int(11) NOT NULL,
+  `fecha_pr` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `hora_pr` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`cve_practicas_realizadas`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `practicas_realizadas`
+--
+
+INSERT INTO `practicas_realizadas` (`cve_practicas_realizadas`, `cve_practica`, `nom_archivo`, `cve_alum`, `fecha_pr`, `hora_pr`) VALUES
+(2, 6, '1Oración al justo juez.docx', 1, 'Sabado, 5 de Enero de 2013', '05:29:31 pm');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `cve_usu` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_usu` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos_usu` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `direccion_usu` text COLLATE utf8_spanish_ci NOT NULL,
+  `telefono_usu` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `sexo_usu` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `carrera` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `login_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `pass_usu` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `cve_cat_user` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`cve_usu`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`cve_usu`, `nombre_usu`, `apellidos_usu`, `direccion_usu`, `telefono_usu`, `correo`, `sexo_usu`, `carrera`, `login_usu`, `pass_usu`, `cve_cat_user`, `status`) VALUES
+(1, 'Diana Tamar', 'Arzat Alamilla', 'Pob. El Congo Macuspana Tabasco', '9361113001', 'chivas_amor:_tauro@hotmail.com', 'Femenino', 'Tecnico en informática', 'stamar', '23', 1, 1),
+(2, 'Ana', 'García', 'Mexio', '1232323233', 'as@ddd.ddd', 'Femenino', 'ing', 'yo', 'tu', 2, 1),
+(3, 'Pedro', 'Picapiedra', 'Macuspana', '123456789', 'qw@fgfg.dfdf', 'Masculino', 'civil', 'pedro', 'p', 3, 1),
+(4, 'Carlos', 'Ramirez Pozo', 'Limbano', '1212', 'cadfdrlod@fdff.dfdf', 'Masculino', '', 'car', '12', 3, 1),
+(5, 'miguel ', 'Humberto', 'java', '9982345678', '@java', 'Masculino', 'ing.sistemas', '', '', 3, 1),
+(6, 'jonatan daniel', 'Perez mendez', 'san jose de las casa', '9358987654', '', 'Masculino', 'ing.sistemas', '', '', 2, 1),
+(7, 'asas', 'aas', 'asas', 'asa', 'asas', 'Masculino', 'asas', '', '', 3, 1);

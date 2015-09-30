@@ -1,0 +1,741 @@
+<?php  if(isset($_SESSION["nom_alumn"])){ ?>
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Instituto de Informatica Thomas Alva Edison</title>
+        <meta http-equiv="refresh" content="1000" />
+        <meta name="description" content="Instituto De Informatica Thomas Alva Edison" />
+        <meta name="keywords" content="iitae, informatica, diseño, word, excel, acces, corel draw, php" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        <link rel="stylesheet" href="<?php echo Conectar::ruta();?>script/css/estilo.css" type="text/css" />
+          
+          
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/style.css" />
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery.min.js" ></script>
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery-ui.min.js" ></script>
+            <script type="text/javascript">
+            	$(document).ready(function(){
+            		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 7000, true);
+            	});
+            </script>
+        
+                <!--[if lt IE 9]>
+                    <script>
+                    var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+                    "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+                    "progress,section,time,video").split(',');
+                    for (var i = 0; i < e.length; i++) {
+                    document.createElement(e[i]);
+                    }
+                    </script>
+               <![endif]-->
+                   <!-- Arquivos utilizados pelo jQuery lightBox plugin -->
+    <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/practicas/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/practicas/jquery.lightbox-0.5.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/practicas/jquery.lightbox-0.5.css" media="screen" />
+    <!-- / fim dos arquivos utilizados pelo jQuery lightBox plugin -->
+        <!-- Ativando o jQuery lightBox plugin -->
+    <script type="text/javascript">
+    $(function() {
+        $('#gallery a').lightBox();
+    });
+    </script>
+   	<style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: white;
+		padding: 10px;
+		width: 520px;
+	}
+	#gallery ul { list-style: none; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid silver;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid green;
+		border-width: 5px 5px 20px;
+		color: #fff;
+	}
+	#gallery ul a:hover { color: #fff; }
+	</style>
+        
+    </head>
+    
+    <body>
+        <div id="principal">
+            <section>
+                 <header>
+                    <?php include("headeralumno.phtml"); ?>
+                 </header>
+                  
+                  <nav>
+                    <?php  $menu=1; include("menu_alumno.phtml");?>
+                  </nav>
+                  
+                  <section id="intro"> 
+                  
+                         <aside id="asideizquierdoad">
+
+                            <h5 id="tituloesiz">Expediente</h5>
+                                 <div id="contiz">
+                                 <a href="<?php echo Conectar::ruta(); ?>c-aini/v-6/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/User-Male.png" border="0" alt="Usuario" width="48" height="48" title="Consultar mis datos" />
+                                  </a>  
+                                 </div>
+                                 
+                           
+                     </aside>
+
+                       </aside>
+                       
+                       <?php if($e==0){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnaiz">
+                            <h5 id="tituloes">&nbsp;Ahora mismo</h5>
+                              
+                                    <div id="culumnaiz1">&nbsp;Contenido<br />
+                                        <div class="textocontenido">
+                                            &nbsp;1 Entrada
+                                        </div>
+                                    
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?> 
+                       
+                       <?php if($e==1){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO HORARIO</h4>
+                              <?php $_GET["id2"]=$con_es_al[0]["cve_grupo"]; $valor=1; ?>
+                                    <div id="centro">
+                                    <?php  include_once("gpo.php"); ?>
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?> 
+                       
+                       
+                       
+                       <?php if($e==2){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO CALIFICACIONES</h4>
+                              <?php $matricu=$con_es_al[0]["matricula"];
+                                    $cali=$oalumno->consulta_cali($matricu); ?>
+                                    <div id="centro">
+                                    
+                                    <table align="center"  style="color: black;" width="600">
+                                    <tr>
+                                        <td align="center">MATERIA</td><td align="center">P1</td><td align="center">P2</td><td width="100" align="center">P.FINAL</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <hr />Windows <hr /></td><td align="center"> <hr /><?php  echo $cali[0]["wind1"]; ?> <hr /></td><td align="center"><hr /><?php  echo $cali[0]["wind2"]; ?><hr /></td ><td align="center"><hr /><?php if($cali[0]["wind1"]!=0 and $cali[0]["wind2"]!=0){ echo ($cali[0]["wind1"]+$cali[0]["wind2"])/2; }else{ echo "0"; }   ?><hr /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Word 2010 <hr /></td><td align="center"><?php  echo $cali[0]["wor1"]; ?><hr /></td><td align="center"><?php  echo $cali[0]["wor2"]; ?><hr /></td><td align="center"><?php if($cali[0]["wor1"]!=0 and $cali[0]["wor2"]!=0){ echo ($cali[0]["wor1"]+$cali[0]["wor2"])/2; }else{ echo "0"; }  ?><hr /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Point 2010 <hr /></td><td  align="center"><?php  echo $cali[0]["pow1"]; ?><hr /></td><td align="center"><?php  echo $cali[0]["pow2"]; ?><hr /></td><td align="center"><?php  if($cali[0]["pow1"]!=0 and $cali[0]["pow2"]!=0){ echo ($cali[0]["pow1"]+$cali[0]["pow2"])/2; }else{ echo "0"; } ?><hr /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Excel 2010 <hr /></td><td align="center"><?php  echo $cali[0]["ex1"]; ?><hr /></td><td align="center"><?php  echo $cali[0]["ex2"]; ?><hr /></td><td align="center"><?php  if($cali[0]["ex1"]!=0 and $cali[0]["ex2"]!=0){ echo ($cali[0]["ex1"]+$cali[0]["ex2"])/2; }else{ echo "0"; } ?><hr /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internet 2010 <hr /></td><td align="center"><?php  echo $cali[0]["in1"]; ?><hr /></td><td align="center"><?php  echo $cali[0]["in2"]; ?><hr /></td><td align="center"><?php if($cali[0]["in1"]!=0 and $cali[0]["in2"]!=0){ echo ($cali[0]["int1"]+$cali[0]["int2"])/2; }else{ echo "0"; }  ?><hr /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Acces 2010 <hr /></td><td align="center"><?php  echo $cali[0]["ac1"]; ?><hr /></td><td align="center"><?php  echo $cali[0]["ac2"]; ?><hr /></td><td align="center"><?php if($cali[0]["ac1"]!=0 and $cali[0]["ac2"]!=0){ echo ($cali[0]["ac1"]+$cali[0]["ac2"])/2; }else{ echo "0"; }  ?><hr /></td>
+                                    </tr>
+                                    <tr></tr>
+                                   </table>
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?>
+                        <?php if($e==3){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO PRACTICAS</h4>
+                                    <div id="centro" >
+                                    
+                                    
+                                    <?php 
+                                    $cv_gpo=$con_es_al[0]["cve_grupo"];
+                                    $trae_prac_e=$oalumno->trae_practicas($cv_gpo);
+                                    $cve_alum=$_SESSION["cve_alum"];
+                                    if(isset($trae_prac_e[0]["cve_practica"])){
+                                        $cve_pra=$trae_prac_e[0]["cve_practica"];
+                                        $trae_prac_re=$oalumno->trae_practicas_re($cve_pra,$cve_alum);
+                                    }else{
+                                        echo "<h4 align='center'>!No hay practicas cargadas</h4>";
+                                        
+                                    }
+                                     if(isset($trae_prac_e[0]["cve_practica"])){
+                                    ?>
+                                     <div id="gallery" style="background-color: #F3F3F3;" align="center">
+                                  <ul>
+                                  <table align="center"> 
+              <?php  
+               $contador=0; 
+              for($i=0;$i<sizeof($trae_prac_e);$i++) {
+                if($contador==0)
+                   {
+              ?>  
+                     <tr> 
+                <?php 
+                     } 
+                     $contador ++;
+              ?>
+              <td align="center">                           
+        <li>
+            <a href="<?php echo Conectar::ruta();?>script/cargar_practicas/img_practicas/<?php echo $trae_prac_e[$i]["imagen_practica"]; ?>" title="<?php echo $trae_prac_e[$i]["descripcion_practica"]; ?>" align="center">
+                <img src="<?php echo Conectar::ruta();?>script/cargar_practicas/img_practicas/<?php echo $trae_prac_e[$i]["imagen_practica"]; ?>" width="72" height="72" alt="" />
+            </a>
+        </li>
+        <?php if($trae_prac_e[$i]["estatus_p"]==1 and $trae_prac_re==null){ ?>
+        <form action="" method="POST"><input type="hidden" name="sp" /><input type="hidden" name="cv_p" value="<?php echo $trae_prac_e[$i]["cve_practica"]; ?>" /><input type="submit" value="Subir Practica" /></form>
+        <?php } ?>
+        </td>
+        <?php 
+        if($contador==5)
+        { $contador=0;
+        ?>
+        </tr>
+         <?php  } ?>
+         <?php } ?>
+        </table>
+                                  </ul>
+                                  </div>
+                                  
+                                  <?php } if(isset($es_p) and $es_p==1){ 
+                                            
+                                           ?> 
+                                            
+                                        <form name="" method="POST" action="<?php echo Conectar::ruta();?>script/cargar_practicas_a/cargar_p_a.php"  enctype="multipart/form-data">
+                                        <table align="center" width="400" >
+                                        <tr>
+                                            <td colspan="2" align="center">::Formulario para cargar su practica al servidor::<br />Nota!<br />Solo se puede subir la practica una vez.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fecha</td><td><input type="text" name="fcha" size="32" value="<?php  echo Conectar::fecha(); ?>" readonly=""/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Imagen de la practica</td><td><img src="<?php echo Conectar::ruta();?>script/cargar_practicas/img_practicas/<?php echo $trae_prac_es[0]["imagen_practica"]; ?>" width="72" height="72" alt="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cargar Archivo</td><td><input type="file" name="archivo" /> </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                            <input type="hidden" name="cv_a" value="<?php echo $_SESSION["cve_alum"]; ?>" />
+                                            <input type="hidden" name="cve_pra" value="<?php echo $trae_prac_es[0]["cve_practica"]; ?>" />
+                                            <input type="hidden" name="cpractica" />
+                                            <input type="submit" value="Cargar" />
+                                            
+                                            </td>
+                                        </tr>
+                                        </table>
+                                </form> 
+                                      <?php  }  ?>
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?>                                               
+                       
+                       <?php if($e==4){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO FECHAS DE CURSO</h4>
+                                    <div id="centro" >
+                                    <table width="672">
+                                        <tr id="tituloes">
+                                            <th colspan="9" align="center">Formato de Fechas para los Modulos</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Modulo</td><td>Semanas</td><td>Fecha Inicio</td><td>Fecha Termino</td>
+                                        </tr>
+                                        
+                                        
+                                        <?php
+
+                                            $fechauno = $con_es_al[0]["fecha_gpo"];;
+                                            $fecha_hoy = date("d-m-Y");
+                                            list($di1,$me1,$an1) = explode('-',$fecha_hoy);
+                                            function dameFecha($fecha,$dia)
+                                            	{   list($day,$mon,$year) = explode('-',$fecha);
+                                            	    return date('d-m-Y',mktime(0,0,0,$mon,$day+$dia,$year));       
+                                            	}
+                                            
+                                            
+                                            $ultimo=dameFecha($fechauno,623);
+                                            
+                                            $fechados = $ultimo;
+                                            
+                                            $fechaaamostar = $fechauno;
+                                            $a=1;
+                                                while(strtotime($fechados) >= strtotime($fechauno))
+                                                {
+                                                    if(strtotime($fechados) != strtotime($fechaaamostar))
+                                                    {
+
+                                                         if($a==8){   $a1="$fechaaamostar<br />";   } 
+                                                         if($a==22){  $a2="$fechaaamostar<br />";  }
+                                                         if($a==29){  $a3="$fechaaamostar<br />";   }
+                                                         if($a==106){ $a4="$fechaaamostar<br />";  }
+                                                         if($a==113){ $a5="$fechaaamostar<br />"; }
+                                                         if($a==162){ $a6="$fechaaamostar<br />";   }
+                                                         if($a==169){ $a7="$fechaaamostar<br />";  }            
+                                                         if($a==260){ $a8="$fechaaamostar<br />";   }
+                                                         if($a==267){ $a9="$fechaaamostar<br />";     }
+                                                         if($a==288){ $a10="$fechaaamostar<br />";   }
+                                                         if($a==295){ $a11="$fechaaamostar<br />";    }
+                                                         if($a==344){ $a12="$fechaaamostar<br />";   }
+                                                         if($a==351){ $a13="$fechaaamostar<br />";  }
+                                                         if($a==379){ $a14="$fechaaamostar<br />"; }
+                                                         if($a==386){ $a15="$fechaaamostar<br />";   }
+                                                         if($a==435){ $a16="$fechaaamostar<br />";    }
+                                                         if($a==442){ $a17="$fechaaamostar<br />";   }
+                                                         if($a==491){ $a18="$fechaaamostar<br />";    }
+                                                         if($a==498){ $a19="$fechaaamostar<br />";   }
+                                                         if($a==547){ $a20="$fechaaamostar<br />";    }
+                                                         if($a==554){ $a21="$fechaaamostar<br />";   }
+                                                         if($a==603){ $a22="$fechaaamostar<br />";   }
+                                                         if($a==610){ $a23="$fechaaamostar<br />";   }
+                                                         if($a==624){ $a24="$fechaaamostar<br />";    }
+                                                         $fechaaamostar = date("d-m-Y", strtotime($fechaaamostar . " + 1 day"));
+                                                         if($fechaaamostar==$fecha_hoy)
+                                                            { 
+                                                                $acum=$a;
+                                                            }
+                                                            else{
+                                                                $acum=0;
+                                                            }
+                                                    $a++;    
+                                                    }
+                                                    else
+                                                    {
+                                                        $a24="$fechaaamostar<br />";
+                                                        break;
+                                                    }
+                                                }
+
+                                               ?>
+                                        
+                                        
+                                        <tr>
+                                            <td colspan="5">Introduccion a la informatica</td><td>1</td><td><?php echo $fechauno;?></td><td><?php echo $fechauno;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Windows 7</td><td>3</td><td><?php
+                                            if($acum>= 1 and $acum<=21){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a1;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a1;
+                                            } ?></td><td><?php
+                                            if($acum>= 22 and $acum<=28){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a2;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a2;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Word 2010</td><td>12</td><td><?php
+                                            if($acum>= 29 and $acum<=105){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a3;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a3;
+                                            } ?></td><td><?php
+                                            if($acum>= 106 and $acum<=112){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a4;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a4;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Power Point 2010</td><td>8</td><td><?php
+                                            if($acum>= 113 and $acum<=161){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a5;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a5;
+                                            } ?></td><td><?php
+                                            if($acum>= 162 and $acum<=168){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a6;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a6;
+                                            } ?></td>
+                                        </tr>
+                                         <tr>
+                                            <td colspan="5">Excel 2010</td><td>14</td>
+                                            <td>
+                                            
+                                            <?php 
+                                            if($acum>= 169 and $acum<=259){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a7;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a7;
+                                            } ?>
+                                            
+                                            </td>
+                                            <td>
+                                            <?php
+                                            if($acum>= 260 and $acum<=266){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a8;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a8;
+                                            } ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Redes E Internet</td><td>4</td>
+                                            <td>
+                                            
+                                            <?php
+                                           if($acum>= 267 and $acum<=287){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a9;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a9;
+                                            } ?>                                            
+                                                                                        
+                                            </td>
+                                            <td><?php
+                                            if($acum>= 288 and $acum<=294){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a10;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a10;
+                                            } ?>  </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Acces 2010</td><td>8</td><td><?php
+                                            if($acum>= 295 and $acum<=343){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a11;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a11;
+                                            } ?>  </td><td><?php
+                                            if($acum>= 344 and $acum<=350){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a12;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a12;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Publisher 2010</td><td>5</td><td><?php
+                                            if($acum>= 351 and $acum<=378){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a13;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a13;
+                                            } ?></td><td><?php
+                                            if($acum>= 379 and $acum<=385){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a14;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a14;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Corel Draw</td><td>8</td><td><?php
+                                            if($acum>= 386 and $acum<=434){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a15;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a15;
+                                            } ?></td><td><?php
+                                           if($acum>= 435 and $acum<=441){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a16;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a16;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Flash</td><td>8</td><td><?php
+                                            if($acum>= 442 and $acum<=490){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a17;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a17;
+                                            } ?></td><td><?php
+                                            if($acum>= 491 and $acum<=497){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a18;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a18;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Dream Weaber</td><td>8</td><td><?php
+                                            if($acum>= 498 and $acum<=546){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a19;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a19;
+                                            } ?></td><td><?php
+                                            if($acum>= 547 and $acum<=553){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a20;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a20;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Visual Basic, Java, php, C#.</td><td>8</td><td><?php
+                                           if($acum>=554 and $acum<=602){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a21;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a21;
+                                            } ?></td><td><?php
+                                            if($acum>= 603 and $acum<=609){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a22;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a22;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Ensamble de pc, repaso de office</td><td>3</td><td><?php
+                                            if($acum>= 610 and $acum<=623){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a23;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a23;
+                                            } ?></td><td><?php
+                                            if($acum>= 624){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a24;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a24;
+                                            } ?></td>
+                                        </tr>
+                                       
+                                    
+                                    
+                                    </table>
+                                    
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?>
+                       
+                       <?php if($e==6){  ?>
+                       
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO CONSULTAR ALUMNO</h4>
+                              
+                            <div id="centro">
+                            <form name="ra" method="POST" action="">
+                              <table width="670" align="center">
+                                <tr>
+                                    <td>
+                                    Fecha de Registro <input type="text" name="fecha" value="<?php echo $con_es_al[0]["fecha"];  ?>" readonly="" size="8" />
+                                    <br /><br />
+                                    Semana De registro. <input type="text" name="semana" value="<?php echo $con_es_al[0]["semana"];?>" readonly="" size="2" />
+                                    <br /><br />
+                                    Matricula. <input type="text" name="matricula" value="<?php echo $con_es_al[0]["matricula"];?>" readonly="" />
+                                    </td>
+                                    <td colspan="2">
+                                   <img src="<?php echo Conectar::ruta();?>script/foto_alumnos/avatar/<?php echo $con_es_al[0]["avatar_al"]; ?>" border="0" width="110" height="100" /> 
+                                    </td>
+                                </tr>
+                              </table>
+                              <table align="center" width="670">
+                                <tr>
+                                    <td colspan="3" class="tituloes" align="center"> <h5> DATOS DEL ASPIRANTE</h5></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre: <input type="text" name="nombre" value="<?php echo $con_es_al[0]["nombre_alum"];?>" /></td>
+                                    <td colspan="2">Apellidos: <input type="text" name="ap" size="50" value="<?php echo $con_es_al[0]["apellidos_al"];?>" readonly="" /> </td>
+                                </tr>
+                                <tr>
+                                    <td>Sexo: <input name="sexo" value="<?php echo $con_es_al[0]["sexo_al"];;?>" readonly="" /> </td>
+                                    <td>Edad: <input type="text" name="edad" value="<?php echo $con_es_al[0]["edad_al"];?>" size="1" readonly=""/> A&ntilde;os </td>
+                                    <td>Curp: <input type="text" name="curp" value="<?php echo $con_es_al[0]["curp_al"];?>" readonly="" size="30" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Nivel Acad&eacute;mico: <input type="text" name="nacademico" size="38" readonly="" value="<?php echo $con_es_al[0]["nacademico_al"];?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Padre o Tutor: <input type="text" name="padre" size="41" value="<?php echo $con_es_al[0]["tutor_al"];?>" readonly="" /></td>
+                                    <td>Telefono: <input type="text" name="tele" value="<?php echo $con_es_al[0]["tel_al"];?>" />*</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Observaciones: <input type="text" name="obser"  size="88" readonly="" value="<?php echo $con_es_al[0]["obser_al"];?>" />*</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="tituloes" align="center"> <h5> DOMICILIO</h5></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Calle: <input type="text" name="calle" size="50" value="<?php echo $con_es_al[0]["calle_al"];?>"  />*</td>
+                                    <td>N&uacute;mero: <input type="text" name="numero" size="20" value="<?php echo $con_es_al[0]["num_al"];?>"  />*</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Colonia / Poblado: <input type="text" name="colo" size="37" value="<?php echo $con_es_al[0]["col_al"];?>" />*
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Estado: <input type="text" name="estado" size="48"  value="<?php echo $con_es_al[0]["estado_al"];?>" />*</h5></td>
+                                    <td>Municipio: <input type="text" name="muni" size="20" value="<?php echo $con_es_al[0]["muni_al"];?>" />*</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="tituloes" align="center"><h5>DATOS GENERALES</h5></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><h5>Especialidad:</h5></td><td align="center"><h5>Promotor</h5></td><td align="center"><h5>Clave del Grupo:</h5></td>
+                                </tr>
+                                 <tr>
+                                    <td align="center">Inform&aacute;tica</td>
+                                    <td align="center">
+                                    <?php $p=$con_es_al[0]["cve_usu"]; $con_nom_pro=$oalumno->consulta_nom_pro($p); echo $con_nom_pro[0]["nombre_usu"]; echo " "; echo $con_nom_pro[0]["apellidos_usu"];  ?>                           
+                                    </td>
+                                    <td align="center">
+                                    <?php echo $_GET["id2"]=$con_es_al[0]["cve_grupo"];?>                       
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="3" class="tituloes" align="center"><h5>DOCUMENTOS ENTREGADOS</h5></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><h5>Acta de Nacimiento: </h5>
+                                    <?php if($con_es_al[0]["acn_al"]=="n"){?>  
+                                    <input type="radio" name="an" value="n"  checked="" />no 
+                                    <?php }  ?>
+                                    <?php if($con_es_al[0]["acn_al"]=="s"){?> 
+                                    <input type="radio" name="an" value="s" checked="" /> Si
+                                    <?php }  ?>
+                                    </td>
+                                    <td align="center"><h5>Constancia de Estudios:</h5>
+                                    <?php if($con_es_al[0]["cone"]=="n"){?>  
+                                    <input type="radio" name="ce" value="n" checked="" />no 
+                                    <?php }  ?>
+                                    <?php if($con_es_al[0]["cone"]=="s"){?> 
+                                    <input type="radio" name="ce" value="s" checked="" /> Si
+                                    <?php }  ?>
+                                    </td>
+                                    <td align="center"><h5>Fotos:</h5>
+                                    <?php if($con_es_al[0]["fto"]=="n"){?> 
+                                    <input type="radio" name="f" value="n" checked="" />no
+                                    <?php }  ?>
+                                    <?php if($con_es_al[0]["fto"]=="s"){?> 
+                                     <input type="radio" name="f" value="s" /> Si
+                                     <?php }  ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="tituloes" align="center"><h5>Cuenta del Alumno</h5></td>
+                                </tr>
+                                <tr>
+                                <td>Login: <input type="text" name="login" value="<?php echo $con_es_al[0]["matricula"];?>" readonly=""/></td>
+                                <td></td>
+                                <td>Contrase&ntilde;a: <input type="password" name="pass" value="0000" readonly="" /></td>
+                                </tr>
+                                <tr>
+                                <td colspan="3">
+                                
+                                <input type="submit" value="Actualizar Datos" />Solo campos marcados con * se pueden modificar
+                                <input type="hidden" name="cve_a" value="<?php echo $con_es_al[0]["cve_alum"];?>" />
+                                <input type="hidden" name="actua" />
+                                </td></tr>
+                              </table>
+                              </form>
+                            </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                       
+                       <?php } ?>
+                       <?php if($e==5){    ?>
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h4 id="tituloes" align="center">MODULO LISTA GENERAL DE LAS PRACTICAS</h4>
+                              <?php  
+                              $cve_alum=$_SESSION["cve_alum"];
+                              $trae_prac_re_ge=$oalumno->trae_practicas_re_ge($cve_alum);
+                                     ?>
+                                    <div id="centro">
+                                    <table align="center" width="600" >
+                                        <tr>
+                                            <th>Numero</th><th>Nombre del Archivo</th><th>Fecha Cargada</th><th>Hora Cargada</th><th>Desc</th>
+                                        </tr>
+                                        <?php for($i=0;$i<sizeof($trae_prac_re_ge); $i++){ ?>
+                                        <tr>
+                                            <td><?php echo $i+1;?></td>
+                                            <td><?php echo $trae_prac_re_ge[$i]["nom_archivo"];?></td>
+                                            <td><?php echo $trae_prac_re_ge[$i]["fecha_pr"];?></td>
+                                            <td><?php echo $trae_prac_re_ge[$i]["hora_pr"];?> </td>
+                                            <td><a href="<?php echo Conectar::ruta();?>script/cargar_practicas_a/img_practicas/<?php echo $trae_prac_re_ge[$i]["nom_archivo"]; ?>" target="_blank"><img src="<?php echo Conectar::ruta();?>images/iconos_sistema/save.gif" border="0" title="De clic para descargar" /></a></td>
+                                        </tr>
+                                        <?php } ?>
+                                        </table>
+                                    
+                                    </div>
+                               
+                         </div>
+                       </article>
+                       <?php  }  ?>                                              
+                       
+                   
+                  </section>
+            </section>
+        
+        </div>
+        <footer>
+            <?php
+                include("footer.phtml");
+             ?>
+        </footer>
+        
+        
+    </body>
+</html>
+<?php } else{ header("location:".Conectar::ruta()."c-home/"); }?>

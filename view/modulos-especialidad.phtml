@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Instituto de Informatica Thomas Alva Edison</title>
+        <meta http-equiv="refresh" content="1000" />
+        <meta name="description" content="Instituto De Informatica Thomas Alva Edison" />
+        <meta name="keywords" content="iitae, informatica, diseño, word, excel, acces, corel draw, php" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        <link rel="stylesheet" href="<?php echo Conectar::ruta();?>script/css/estilo.css" type="text/css" />
+          
+          
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/style.css" />
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery.min.js" ></script>
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery-ui.min.js" ></script>
+            <script type="text/javascript">
+            	$(document).ready(function(){
+            		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 7000, true);
+            	});
+            </script>
+        
+                <!--[if lt IE 9]>
+                    <script>
+                    var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+                    "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+                    "progress,section,time,video").split(',');
+                    for (var i = 0; i < e.length; i++) {
+                    document.createElement(e[i]);
+                    }
+                    </script>
+               <![endif]-->
+        
+    </head>
+    
+    <body>
+        <div id="principal">
+            <section>
+                 <header>
+                    <?php include("header.phtml"); ?>
+                 </header>
+                  
+                  <nav>
+                    <?php  $menu=2; include("menu.phtml");?>
+                  </nav>
+                  
+                  <section id="intro"> 
+                  
+                         <aside id="asideizquierdo">
+
+<h3 align="center">Promociones</h3>
+                         <div align="center">
+                         <img src="<?php echo Conectar::ruta();?>/images/img_index/anuncio.png" border="0" alt="facebook" title="facebook" />
+                         <img src="<?php echo Conectar::ruta();?>/images/img_index/anuncio2.png" border="0" alt="facebook" title="facebook" />
+                         
+                        <!--
+<iframe width="270" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps/ms?msa=0&msid=216683750034574090921.0004c90a4755fe837a290&ie=UTF8&t=m&f=d&daddr=Instituto+de+Informatica+Thomas+Alva+Edison+%4017.757821,-92.594254&ll=17.759231,-92.59552&spn=0.014305,0.013733&z=15&output=embed"></iframe>
+                     
+-->
+</div>
+
+                     </aside>
+                       </aside>
+                       
+                       <article id="articlecentro">
+                        <div id="ingles">
+                         <h3 align="left">&nbsp;Modulos de las Especialidades</h3>
+                         
+                         <h4>Windows E Internet</h4>
+                         <p>Identificar los antecedentes de las computadoras, as&iacute; como su clasificaci&oacute;n y tecnisismos. <br />
+                         Como tanbien los elementos de harware y software que intervienen en una computadora y describir su funcion.
+                         </p>
+                         <br />
+                         <h4>Procesador de Texto(Word 2010) y hojas de presentaciones(PowerPoint 2010)</h4>
+                         <p>Identificar las caracteristicas del procesador de texto asi como de las hojas de 
+                         presentaciones, editar y dar fomatos, dise&ntilde;ar y distribuir un trabajo. Transferir objetos entre aplicaciones.</p>
+                         <br />
+                         <h4>Hoja de C&aacute;lculo (Excel 2010)</h4>
+                         <p>Conoser todas y cada una de las herramientas que ofrese este potente software para poder editar, dar formato, aplicar formulas y }
+                         funciones, a dem&aacute;s de crear graficas diversas y para hacer a&uacute;n m&aacute;s facil se aprendera las herramientas de macros.</p>
+                         <br />
+                         <h4>Bases de Datos (Acces 2010)</h4>
+                         <p>Identificar los elementos que integran una base de datos as&iacute; como su analizis de la imformacion para generar todas y cada una de las tablas
+                         que conformaran dica base.
+                         </p> 
+                         <br />
+                         <h4>Dise&ntilde;o Grafico y  Programacion.</h4>
+                         <p>Ser capaz de realizar imagenes vectoriales y editar imagenes de bitmaps en los software, CorelDraw, Fireworks, PhotoShop, Gimp. <br />
+                         Conoser, Analizar la logica de la Programacion Par poder Realizar todos los problemas de el mundo de la programacion en los lenguajes, 
+                         Java, C#, Php, Jsp.
+                         </p>
+                           		           
+                        </div>   
+                       </article>
+                   
+                  </section>
+            </section>
+        
+        </div>
+        <footer>
+            <?php
+                include("footer.phtml");
+             ?>
+        </footer>
+        
+        
+    </body>
+</html>
+

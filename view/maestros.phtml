@@ -1,0 +1,559 @@
+<?php  if(isset($_SESSION["admin"]) or $_SESSION["nom_se"]){ ?>
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Instituto de Informatica Thomas Alva Edison</title>
+        <meta http-equiv="refresh" content="1000" />
+        <meta name="description" content="Instituto De Informatica Thomas Alva Edison" />
+        <meta name="keywords" content="iitae, informatica, diseño, word, excel, acces, corel draw, php" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        <link rel="stylesheet" href="<?php echo Conectar::ruta();?>script/css/estilo.css" type="text/css" />
+          
+          
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/style.css" />
+          
+          <script type="text/javascript" language="javascript" src="<?php echo Conectar::ruta();?>script/js/webcam.js"></script>
+            
+        
+                <!--validacion-->
+                <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/validacion/jquery_1.4.js"></script>
+                <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/validacion/jquery_validate.js"></script>
+                
+                <script type="text/javascript">
+                $(function(){
+                	$('#almaestro').validate({
+                		rules: {
+                		'nombre': 'required',
+                		'aps': 'required',
+                        'sexo': 'required',
+                        'edad': 'required',
+                        'curp': 'required',
+                        'nacademico': 'required',
+                        'padre': 'required',
+                        'obser': 'required',
+                		'tele': { required: true, number: true },
+                        'calle': 'required',
+                       	'numero': { required: true, number: true },
+                        'colo': 'required',
+                        'estado': 'required',
+                        'muni': 'required',
+                        'id_pro': 'required',
+                        'gpo': 'required',
+                		'email': { required: true, email: true },
+                		'tipo_identidad': 'required',
+                		'deportes[]': { required: true, minlength: 1 }
+                		},
+                		messages: {
+                		'nombre': '<h5>Debe ingresar el nombre</h5>',
+                		'aps': '<h5>Debe ingresar el apellido</h5>',
+                        'sexo': '<h5>Seleccione el Sexo</h5>',
+                        'edad': '<h5>Seleccione la Edad</h5>',
+                        'curp': '<h5>Ingrese la curp</h5>',
+                        'nacademico': '<h5>Ingrese nivel academico</h5>',
+                        'obser': '<h5>Ingrese Alguna observacion</h5>',
+                        'padre': '<h5>Ingrese nivel academico</h5>',
+                		'tele': { required: '<h5>Debe ingresar el numero de Telefono<h5>', number: '<h5>Debe ingresar un numero<h5>' },
+               		    'calle': '<h5>Ingrese El nombre de la calle</h5>',
+                        'numero': { required: '<h5>Debe ingresar el numero de la calle<h5>', number: '<h5>Debe ingresar un numero<h5>' },
+                        'colo': '<h5>Ingrese El poblado o coloni</h5>',
+                        'estado': '<h5>Ingrese El estado</h5>',
+                        'muni': '<h5>Ingrese El estado</h5>',
+                        'id_pro': '<h5>Seleccione el promotor</h5>',
+                        'gpo': '<h5>Seleccione el grupo</h5>',
+                        'email': { required: 'Debe ingresar un correo electrónico', email: 'Debe ingresar el correo electrónico con el formato correcto. Por ejemplo: u@localhost.com' },
+                		'tipo_identidad': 'Debe ingresar el número de documento',
+                		'deportes[]': 'Debe seleccionar mínimo un deporte'
+                		},
+                		debug: true,
+                		/*errorElement: 'div',*/
+                		//errorContainer: $('#errores'),
+                		submitHandler: function(form){
+                		    alert('El formulario ha sido validado correctamente!');
+                			form.submit();
+                		}
+                	});
+                });
+                </script>
+               <!--fin de validacion-->
+        
+    </head>
+    
+    <body>
+        <div id="principal">
+            <section>
+                 <header>
+                    <?php 
+                    if(isset($_SESSION["admin"])){ include("header2.phtml");  }else{ include("headersecretaria.phtml");  }
+                     ?>
+                 </header>
+                  
+                  <nav>
+                    <?php  
+                    if(isset($_SESSION["admin"])){ $menu=2; include("menu2.phtml");  }else{ $menu=1; include("menu_secretaria.phtml");  }
+                    ?>
+                  </nav>
+                  
+                  <section id="intro"> 
+                  
+                   <?php if($v==0){ ?>
+                      <aside id="asideizquierdoad1">
+                            <h5 id="tituloesiz">&nbsp;Estatus Maestros</h5>
+                                 <div id="contiz1">
+                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/v-10901010101010/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/add_user.png" border="0" alt="Usuario" title="Alta de Usuario" />
+                                    </a>
+                                         <br />
+                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/v-10901010101011/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/send.png" border="0" alt="Usuario" width="48" height="48" title="Consulta de Usuario" />
+                                    </a>
+                                 </div>
+
+                     </aside>
+                  
+                  <?php } ?>
+                  
+                  <?php if($v!=0){ ?>
+                         <aside id="asideizquierdoad">
+
+                            <h5 id="tituloesiz">&nbsp;Estatus Usuarios</h5>
+                                 <div id="contiz">
+                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/v-10901010101010/">
+                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/add_user.png" border="0" alt="maestro" title="Alta de Usuarios" />
+                                    </a>
+                                    <br />
+                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/v-10901010101011/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/send.png" border="0" alt="Usuario" width="48" height="48" title="Consulta de Usuario" />
+                                    </a>
+                                 </div>
+
+                     </aside>
+                     <?php } ?>
+                       
+                      <?php if($v==0){ ?> 
+                       <article id="articlecentroad1">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Maestros Actuales en Labor</h5>
+                              
+                              <div id="centro1">
+                                        <table width="800">
+                                            <tr>
+                                                <th>Nombre</th><th>Apellidos</th><th>Telefono</th><th>Sexo</th><th>Carrera</th><th>C.Profesional</th><th>Acciones</th>
+                                            </tr>
+                                            <?php for($i=0; $i<sizeof($consulta_maestro_ge); $i++){ ?>
+                                            <tr>
+                                                <td><?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["apellido_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["telefono_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["sexo_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["carrera_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["cedula_maes"]; ?></td>
+                                                <td>
+
+                                               <?php 
+                                                  $av2=$consulta_maestro_ge[$i]["avatar_maes"];
+                                                  if($av2==0)
+                                                  {
+                                                    ?>
+                                                    
+                                                    <a href="#">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/remove_user.png" border="0" alt="Eliminar" title="Tome Una Foto A '<?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?>' " />
+                                                 </a>&nbsp;
+                                                 
+                                                    <a href="#">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/edit_user.png" border="0" alt="Editar" title="El Usuario <?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?> No Tiene Foto, Tomele Una" />
+                                                </a>&nbsp;
+                                                    
+                                                    
+                                                <a href="<?php echo Conectar::ruta(); ?>c-maestros/e-3/v-<?php echo $consulta_maestro_ge[$i]["cve_maes"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/video_chat.png" border="1" alt="Tomar Foto" title=" 'Sin foto' Tomar Foto" />
+                                                 </a>
+                                                    
+                                                    <?php
+                                                  }else{
+                                                    ?>
+                                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/e-2/v-<?php echo $consulta_maestro_ge[$i]["cve_maes"]; ?>/">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/remove_user.png" border="0" alt="Eliminar" title="Eliminar '<?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?>' " />
+                                                 </a>&nbsp;
+                                                    
+                                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/e-1/v-<?php echo $consulta_maestro_ge[$i]["cve_maes"]; ?>/">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/edit_user.png" border="0" alt="Editar" title="Ver mas sobre <?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?>" />
+                                                </a>&nbsp;
+                                                    
+                                                    <a href="#">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/video_chat.png" border="0" alt="Tomar Foto" title=" 'Error' Usuario con Foto" />
+                                                 </a>
+                                                    
+                                                    <?php
+                                                  }
+                                           
+                                               
+                                               
+                                               
+                                                 ?>
+                                               
+                                               
+                                                                                                                                                   
+                                                </td>
+                                            </tr>
+                                            <?php } ?>
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if($v==10901010101010){ ?> 
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Alta De maestros</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                    <form method="POST" action="" name="almaestro" id="almaestro">
+                                        <table>
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Datos Personales</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nombre:&nbsp;<input type="text" name="nombre" id="nombre" /> &nbsp;&nbsp;&nbsp;
+                                                Apellidos:&nbsp;<input type="text" name="aps" id="aps" />
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>Direccion:&nbsp;<input type="text" name="dire" /> &nbsp;&nbsp;&nbsp;
+                                                Telefono:&nbsp;<input type="text" name="tel" />
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>Correo Electronico:&nbsp;<input type="text" name="correo" /> &nbsp;&nbsp;&nbsp;
+                                                Sexo:&nbsp;<select name="sexo"><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carrera:&nbsp;<input type="text" name="carrera" /> &nbsp;&nbsp;&nbsp;
+                                                Cedula Profesional:&nbsp;<input type="text" name="cedula" />
+                                                </td>
+                                            </tr>
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Datos Para la Cuenta</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nombre de la Cuenta:&nbsp;<input type="text" name="login" /> &nbsp;&nbsp;&nbsp;
+                                                Contrase&ntilde;a:&nbsp;<input type="password" name="pass" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <td>
+                                                 <input type="hidden" name="alm" value="alm" />
+                                                 <input type="submit" value="Guardar Registro" />
+                                                 </td>
+                                            </tr>
+                                        </table>
+                                     </form>       
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                    <?php if($v==10901010101011){ ?> 
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Consulta Espesifica  De Maestros</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                    <form method="POST" action="" name="alsecretaria">
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Ingrese Datos Para su Consulta</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nombre:&nbsp;<input type="text" name="nombre" /> &nbsp;&nbsp;&nbsp;
+                                                Apellidos:&nbsp;<input type="text" name="aps" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <td>
+                                                 <input type="hidden" name="consulta_es" />
+                                                 <input type="submit" value="Consultar" />
+                                                 </td>
+                                            </tr>
+                                        </table>
+                                     </form>
+                                     <?php 
+                                       if(isset($co_es) and $co_es==1){
+                                        ?>
+                                        <br />
+                                        <table width="680" align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="6" style="color: black; font-weight: bold;">Registros Encontrados</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre</th><th>Apellidos</th><th>Direccion</th><th>Cedula</th><th>Estatus</th><th>Acciones</th>
+                                            </tr>
+                                            <?php for($i=0; $i<sizeof($consul_es); $i++){ ?>
+                                            <tr>
+                                                <td><?php echo $consul_es[$i]["nombre_maes"]; ?></td><td><?php echo $consul_es[$i]["apellido_maes"]; ?></td><td><?php echo $consul_es[$i]["direccion_maes"]; ?></td><td><?php echo $consul_es[$i]["cedula_maes"]; ?></td><td><?php if($consul_es[$i]["status_maes"]==1){ echo "Activo"; }else{ echo "Desactivo"; } ?></td>
+                                                
+                                                
+                                                <td>
+                                                <?php 
+                                                  $av2=$consul_es[$i]["avatar_maes"];
+                                                  if($av2==0)
+                                                  {
+                                                    ?>
+                                                    
+                                                    <a href="#">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/remove_user.png" border="0" alt="Eliminar" title="Tome Una Foto A '<?php echo $consul_es[$i]["nombre_maes"]; ?>' " />
+                                                 </a>&nbsp;
+                                                 
+                                                    <a href="#">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/edit_user.png" border="0" alt="Editar" title="El Usuario <?php echo $consul_es[$i]["nombre_maes"]; ?> No Tiene Foto, Tomele Una" />
+                                                </a>&nbsp;
+                                                    
+                                                    
+                                                <a href="<?php echo Conectar::ruta(); ?>c-maestros/e-3/v-<?php echo $consul_es[$i]["cve_maes"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/video_chat.png" border="1" alt="Tomar Foto" title=" 'Sin foto' Tomar Foto" />
+                                                 </a>
+                                                    
+                                                    <?php
+                                                  }else{
+                                                    ?>
+                                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/e-2/v-<?php echo $consul_es[$i]["cve_maes"]; ?>/">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/upload.png" border="0" alt="Eliminar" title="Activar a  '<?php echo $consul_es[$i]["nombre_maes"]; ?>' " />
+                                                 </a>&nbsp;
+                                                    
+                                                    <a href="<?php echo Conectar::ruta(); ?>c-maestros/e-1/v-<?php echo $consulta_maestro_ge[$i]["cve_maes"]; ?>/">
+                                                  <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/edit_user.png" border="0" alt="Editar" title="Ver mas sobre <?php echo $consul_es[$i]["nombre_maes"]; ?>" />
+                                                </a>&nbsp;
+                                                    
+                                                    <a href="#">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/video_chat.png" border="0" alt="Tomar Foto" title=" 'Error' Usuario con Foto" />
+                                                 </a>
+                                                    
+                                                    <?php
+                                                  }
+                                           
+                                               
+                                               
+                                               
+                                                 ?>
+                                                
+                                                </td>
+                                                
+                                                
+                                            </tr>
+                                            <?php } ?>
+                                        </table>
+                                        
+                                        <?php
+                                        
+                                       }
+                                     ?>       
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   
+                    <?php if(isset($e) and $e==1){ ?> 
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Consultas Espesificas de maestros</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                    <form method="POST" action="" name="alsecretaria">
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Datos Personales</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                     <img src="<?php echo Conectar::ruta();?>script/foto_maestros/avatar/<?php echo $consulta_es[0]["avatar_maes"]; ?>" border="0" alt="avatar" title="Avatar" width="100" height="80" /></a>             
+                                                &nbsp; Solo Campos Marcados con * se pueden modificar!
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nombre:&nbsp;<input type="text" name="nombre" readonly="" value="<?php echo $consulta_es[0]["nombre_maes"]; ?>" /> &nbsp;&nbsp;&nbsp;
+                                                Apellidos:&nbsp;<input type="text" name="aps" readonly="" size="30" value="<?php echo $consulta_es[0]["apellido_maes"]; ?>" />
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>Direccion:&nbsp; <input type="text" name="dire" size="67"  value="<?php echo $consulta_es[0]["direccion_maes"]; ?>" />* &nbsp;&nbsp;&nbsp;
+                                                </td>
+                                            </tr>
+                                             <tr><td>
+                                               Telefono:&nbsp;<input type="text" name="tel"  value="<?php echo $consulta_es[0]["telefono_maes"]; ?>" />*
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>Correo Electronico:&nbsp;<input type="text" name="correo" size="30"  value="<?php echo $consulta_es[0]["correo_maes"]; ?>" />* &nbsp;&nbsp;&nbsp;
+                                                Sexo:&nbsp;<input type="text" name="sexo" readonly="" size="13" value="<?php echo $consulta_es[0]["sexo_maes"]; ?>" />                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carrera:&nbsp;<input type="text" name="carrera" readonly="" value="<?php echo $consulta_es[0]["carrera_maes"]; ?>" /> &nbsp;&nbsp;&nbsp;
+                                                 Cedula: &nbsp;<input type="text" name="cat" readonly="" value="<?php echo $consulta_es[0]["cedula_maes"]; ?>" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <td>
+                                                 <input type="hidden" name="acm" />
+                                                 <input type="hidden" value="<?php echo $consulta_es[0]["cve_maes"];  ?>" name="cve" />
+                                                 <input type="submit"  value="Actualizar Registro" />
+                                                 </td>
+                                            </tr>
+                                        </table>
+                                     </form>       
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if(isset($e) and $e==2){ ?> 
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Eliminacion de Usuario</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                    <form method="POST" action="" name="alsecretaria">
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Datos Personales</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                     <img src="<?php echo Conectar::ruta();?>script/foto_maestros/avatar/<?php echo $consulta_es[0]["avatar_maes"]; ?>" border="0" alt="avatar" title="Avatar" width="100" height="80" /></a>             
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nombre:&nbsp;<input type="text" name="nombre" readonly="" value="<?php echo $consulta_es[0]["nombre_maes"]; ?>" /> &nbsp;&nbsp;&nbsp;
+                                                Apellidos:&nbsp;<input type="text" name="aps" readonly="" size="30" value="<?php echo $consulta_es[0]["apellido_maes"]; ?>" />
+                                                </td>
+                                            </tr>
+                                            
+                                             
+                                            <tr>
+                                                <td> Cedula: &nbsp;<input type="text" name="cat" readonly="" value="<?php echo $consulta_es[0]["cedula_maes"]; ?>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                Estatus <input type="radio" name="es" value="1" checked="" />Activo<input type="radio" name="es" value="0"  />Desactivar
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <td>
+                                                 <input type="hidden" name="on" />
+                                                 <input type="hidden" name="cve" value="<?php echo $v; ?>" />
+                                                 <input type="submit" value="Guardar Cambios" />
+                                                 </td>
+                                            </tr>
+                                        </table>
+                                     </form>       
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if(isset($e) and $e==3){ ?> 
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Tomar Foto a Maestro</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="2" style="color: black; font-weight: bold;">Datos Personales</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                
+                                                	<!-- Configure a few settings -->
+        	<script language="JavaScript">
+        		webcam.set_api_url('http://localhost/iitae/script/foto_maestros/test.php?id=<?php echo $v; ?>');
+        		webcam.set_quality( 90 ); // JPEG quality (1 - 100)
+        		webcam.set_shutter_sound( true ); // play shutter click sound
+        	</script>
+        	
+        	<!-- Next, write the movie to the page at 320x240 -->
+        	<script language="JavaScript">
+        		document.write( webcam.get_html(320, 240) );
+        	</script>
+        	
+        	<!-- Some buttons for controlling things -->
+        	<br/><br>
+        	<form>
+        
+            <a href="javascript:void(0);" onclick="take_snapshot()" title="Tomar Fotografia">
+            <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/webcam.jpg" border="0" width="50" height="50" />
+            </a>
+             	</form>
+        	
+        	
+        	<!-- Code to handle the server response (see test.php) -->
+        	<script language="JavaScript">
+        		webcam.set_hook( 'onComplete', 'my_completion_handler' );
+        		
+        		function take_snapshot() {
+        			// take snapshot and upload to server
+        			document.getElementById('upload_results').innerHTML = '<h4>Guardando Foto...</h4>';
+        			webcam.snap();
+        		}
+        		
+        		function my_completion_handler(msg)
+        		 {
+        			window.location="http://localhost/iitae/c-maestros/";	
+        		}
+        	</script>
+                                                
+                                                </td>
+                                                  <td width=50>&nbsp;</td>
+                <td valign=top>
+		<div id="upload_results" style="background-color: #00FF40;"></div>
+	</td>
+                                            </tr>
+                                        </table>
+                                       
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   
+                   
+                  </section>
+            </section>
+        
+        </div>
+       <footer>
+            <?php
+                include("footer.phtml");
+             ?>
+        </footer>
+        
+        
+    </body>
+</html>
+<?php } else{ header("location:".Conectar::ruta()."c-home/"); }?>

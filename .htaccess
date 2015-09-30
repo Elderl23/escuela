@@ -1,0 +1,20 @@
+RewriteEngine On
+
+
+RewriteRule ^.*c-([0-9-a-z]+)\/$ index.php?accion=$1 [S]
+
+RewriteRule ^.*c-([0-9-a-z]+)/*/v-([0-9]+)\/$ index.php?accion=$1&valor=$2 [L]
+
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)\/$ index.php?accion=$1&valor=$2 [L]
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/d-([0-9]+)\/$ index.php?accion=$1&valor=$2&dia=$3 [L]
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/d-([0-9]+)/*/h-([0-9]+)\/$ index.php?accion=$1&valor=$2&dia=$3&hora=$4 [L]
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/d-([0-9]+)/*/h-([0-9]+)/*/m-([0-9]+)\/$ index.php?accion=$1&valor=$2&dia=$3&hora=$4&maes=$5 [L]
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/d-([0-9]+)/*/h-([0-9]+)/*/m-([0-9]+)/*/a-([0-9]+)\/$ index.php?accion=$1&valor=$2&dia=$3&hora=$4&maes=$5&au=$6 [L]
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/d-([0-9]+)/*/h-([0-9]+)/*/m-([0-9]+)/*/a-([0-9]+)/*/l-([0-9]+)\/$ index.php?accion=$1&valor=$2&dia=$3&hora=$4&maes=$5&au=$6&lab=$7 [L]
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/d-([0-9]+)/*/h-([0-9]+)/*/m-([0-9]+)/*/a-([0-9]+)/*/l-([0-9]+)/*/hl-([0-9]+)\/$ index.php?accion=$1&valor=$2&dia=$3&hora=$4&maes=$5&au=$6&lab=$7&hl=$8 [L]
+
+RewriteRule ^.*c-([0-9-a-z]+)/*/d2-([0-9]+)\/$ index.php?accion=$1&dia2=$2 [L]
+
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9]+)/*/cv-([0-9]+)\/$ index.php?accion=$1&valor=$2&clave=$3 [L]
+
+RewriteRule ^.*c-([0-9-a-z]+)/*/e-([0-9-a-z]+)/*/v-([0-9]+)\/$ index.php?accion=$1&estatus=$2&valor=$3 [L]

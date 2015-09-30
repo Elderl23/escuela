@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Instituto de Informatica Thomas Alva Edison</title>
+        <meta http-equiv="refresh" content="1000" />
+        <meta name="description" content="Instituto De Informatica Thomas Alva Edison" />
+        <meta name="keywords" content="iitae, informatica, diseño, word, excel, acces, corel draw, php" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        <link rel="stylesheet" href="<?php echo Conectar::ruta();?>script/css/estilo.css" type="text/css" />
+          
+          
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/style.css" />
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery.min.js" ></script>
+            <script type="text/javascript" src="<?php echo Conectar::ruta();?>script/js/jquery-ui.min.js" ></script>
+            <script type="text/javascript">
+            	$(document).ready(function(){
+            		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 7000, true);
+            	});
+            </script>
+        
+                <!--[if lt IE 9]>
+                    <script>
+                    var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+                    "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+                    "progress,section,time,video").split(',');
+                    for (var i = 0; i < e.length; i++) {
+                    document.createElement(e[i]);
+                    }
+                    </script>
+               <![endif]-->
+        
+    </head>
+    
+    <body>
+        <div id="principal">
+            <section>
+                 <header>
+                    <?php include("header.phtml"); ?>
+                 </header>
+                  
+                  <nav> 
+                    <?php $menu=3; include("menu.phtml");?>
+                  </nav>
+                  
+                  <section id="intro"> 
+                  
+                         <aside id="asideizquierdo">
+
+<h3 align="center">Promociones</h3>
+                         <div align="center">
+                         <img src="<?php echo Conectar::ruta();?>/images/img_index/anuncio.png" border="0" alt="facebook" title="facebook" />
+                         <img src="<?php echo Conectar::ruta();?>/images/img_index/anuncio2.png" border="0" alt="facebook" title="facebook" />
+                         
+                        <!--
+<iframe width="270" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps/ms?msa=0&msid=216683750034574090921.0004c90a4755fe837a290&ie=UTF8&t=m&f=d&daddr=Instituto+de+Informatica+Thomas+Alva+Edison+%4017.757821,-92.594254&ll=17.759231,-92.59552&spn=0.014305,0.013733&z=15&output=embed"></iframe>
+                     
+-->
+</div>
+
+                     </aside>
+                       </aside>
+                       
+                       <article id="articlecentro">
+                         <br /><br />
+                         <div align="center">
+                          <img src="<?php echo Conectar::ruta();?>/images/img_index/ninospu.png" border="0" alt="ninos" title=""/>
+                         </div> 
+                         <br /> <br /><br /><br /> 		           
+                            
+                       </article>
+                   
+                  </section>
+            </section>
+        
+        </div>
+        <footer>
+            <?php
+                include("footer.phtml");
+             ?>
+        </footer>
+        
+        
+    </body>
+</html>
+

@@ -1,0 +1,1056 @@
+<?php  if(isset($_SESSION["admin"]) or $_SESSION["nom_se"]){ ?>
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Instituto de Informatica Thomas Alva Edison</title>
+        <meta http-equiv="refresh" content="1000" />
+        <meta name="description" content="Instituto De Informatica Thomas Alva Edison" />
+        <meta name="keywords" content="iitae, informatica, diseño, word, excel, acces, corel draw, php" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        <link rel="stylesheet" href="<?php echo Conectar::ruta();?>script/css/estilo.css" type="text/css" />
+          
+          
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta();?>script/css/style.css" />
+          
+          <script type="text/javascript" language="javascript" src="<?php echo Conectar::ruta();?>script/js/webcam.js"></script>
+            
+        
+                <!--[if lt IE 9]>
+                    <script>
+                    var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+                    "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+                    "progress,section,time,video").split(',');
+                    for (var i = 0; i < e.length; i++) {
+                    document.createElement(e[i]);
+                    }
+                    </script>
+               <![endif]-->
+        
+    </head>
+    
+    <body>
+        <div id="principal">
+            <section>
+                 <header>
+                    <?php if(isset($_SESSION["admin"])){ include("header2.phtml");  }else{ include("headersecretaria.phtml");  }
+                      ?>
+                 </header>
+                  
+                  <nav>
+                    <?php  
+                    if(isset($_SESSION["admin"])){ $menu=4; include("menu2.phtml");  }else{ $menu=1; include("menu_secretaria.phtml");  }
+                    
+                    ?>
+                  </nav>
+                  
+                  <section id="intro"> 
+                  
+                   <?php if($e==0 or $e==6 ){ ?>
+                      <aside id="asideizquierdoad1">
+                            <h5 id="tituloesiz">&nbsp;Estatus Grupos</h5>
+                                 <div id="contiz1">
+                                    <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/gpo.jpg" border="0" alt="Usuario" title="Registrar nuevo Grupo" />
+                                    </a>
+                                         <br />
+                                    <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-2/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/user_group.png" border="0" alt="grupo" width="48" height="48" title="Consulta un grupo" />
+                                    </a>
+                                    
+                                    <br />
+                                    <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-6/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/ultimos.png" border="0" alt="grupo" width="48" height="48" title="Grupos Actuales" />
+                                    </a>
+                                 </div>
+
+                     </aside>
+                  
+                  <?php } ?>
+                  
+                  <?php if($e!=0 and $e!=6){ ?>
+                         <aside id="asideizquierdoad">
+
+                            <h5 id="tituloesiz">&nbsp;Estatus Grupos</h5>
+                                 <div id="contiz">
+                                    <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/">
+                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/gpo.jpg" border="0" alt="maestro" title="Registrar nuevo Grupo" />
+                                    </a>
+                                    <br />
+                                    <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-2/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/user_group.png" border="0" alt="Usuario" width="48" height="48" title="Consulta un grupo" />
+                                    </a>
+                                    
+                                    <br />
+                                    <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-6/">
+                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/ultimos.png" border="0" alt="grupo" width="48" height="48" title="Grupos Actuales" />
+                                    </a>
+                                    <?php if($e==1){  ?>
+                                    
+                                    <table align="center" width="100%">
+                                       <form method="POST" action=""> 
+                                        <tr>
+                                            <th colspan="2" align="center">Registro de grupo</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Fecha:</td>
+                                            <td><?php echo $fecha_actual = date("d-m-Y");  ?></td>
+                                            <input type="hidden" name="fecha" value="<?php echo $fecha_actual = date("d-m-Y"); ?>" />
+                                        </tr>
+                                        <tr>
+                                            <td>Folio:</td>
+                                            <td><?php if($e==1){  $caracter="Gpo";  for($b=0;$b<sizeof($consulta_gpo);$b++){ $suma=$consulta_gpo[$b]["cve_grupo"]+1; $nom_grupo=$suma; echo $caracter.$nom_grupo; } }   ?></td>
+                                            <input type="hidden" name="nom_gpo" value="<?php echo $caracter.$nom_grupo; ?>" />
+                                        </tr>
+                                        <tr>
+                                            <td>D&iacute;a:</td>
+                                            <td><?php if(isset($_SESSION["dia_cve"]) and isset($d) ){ echo $_SESSION["dia"];}else{ echo "?"; }  ?></td>
+                                            <input type="hidden" value="<?php echo $_SESSION["dia"]; ?>" name="dia"  />
+                                        </tr>
+                                        <tr>
+                                            <td>Horario:</td>
+                                            <td><?php if(isset($_SESSION["cve"]) and isset($h)){ echo $_SESSION["cve2"];}else{ echo "?"; }  ?></td>
+                                            <input type="hidden" value="<?php echo $_SESSION["cve"]; ?>" name="horario"  />
+                                        </tr>
+                                        <tr>
+                                            <td>Maestro:</td>
+                                            <td><?php if(isset($consulta_es)){ for($i=0;$i<sizeof($consulta_es); $i++){ $_SESSION["cve_m"]=$consulta_es[$i]["cve_maes"];  echo $consulta_es[$i]["nombre_maes"]; echo " ";  echo $consulta_es[$i]["apellido_maes"];  } }else{  echo "?"; }  ?></td>
+                                            <input type="hidden" value="<?php echo $_SESSION["cve_m"]; ?>" name="maestro"  />
+                                        </tr>
+                                        <tr>
+                                            <td>Aula:</td>
+                                            <td><?php if(isset($nombre_au)){ for($i=0;$i<sizeof($nombre_au); $i++){ $_SESSION["cve_au"]=$nombre_au[$i]["cve_au"]; echo $nombre_au[$i]["nombre_au"]; echo " ";echo "Edificio"; echo $nombre_au[$i]["edificio_au"]; echo " ";  }}else{ echo "?"; }   ?></td>
+                                            <input type="hidden" value="<?php echo $_SESSION["cve_au"]; ?>" name="aula"  />
+                                        </tr>
+                                        <tr>
+                                            <td>Laboratorio:</td>
+                                            <td><?php if(isset($con_la_es)){ for($g=0;$g<sizeof($con_la_es); $g++){ $_SESSION["cve_lab"]=$con_la_es[$g]["cve_lab"]; echo $con_la_es[$g]["nombre_lab"]; echo " ";  }  }else{ echo "?"; } ?></td>
+                                            <input type="hidden" value="<?php echo $_SESSION["cve_lab"]; ?>" name="Laboratorio"  />
+                                        </tr>
+                                        <tr>
+                                            <td>Horario de laboratorio:</td>
+                                            <td><?php if(isset($hl)){ for($s=0;$s<sizeof($con_hl); $s++){ $_SESSION["cve_hl"]=$con_hl[$s]["cve_horarios_lab"]; echo $con_hl[$s]["horario_ini"]; echo "-"; echo $con_hl[$s]["horario_fin"]; echo " ";  }  }else{ echo "?"; } ?></td>
+                                            <input type="hidden" value="<?php echo $_SESSION["cve_hl"]; ?>" name="hl"  />
+                                        </tr>
+                                        <?php if(isset($hl)){ ?>
+                                        <tr></tr><tr></tr><tr></tr><tr></tr>
+                                        <tr>
+                                            <td colspan="2" align="center">
+                                                <input type="hidden" name="cg" />
+                                                <input type="submit" value="Cargar Grupo" />
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                        </form>
+                                    </table>
+                                    <?php }  ?>
+                                    
+                                 </div>
+
+                     </aside>
+                     <?php } ?>
+                     
+                       
+                      <?php if($e==0){ ?> 
+                       <article id="articlecentroad1">
+                         
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Modulo Consultar grupo por d&iacute;a :: De clic sobre el d&iacute;a para consultar</h5>
+                              
+                              <div id="centro1">
+                                        <table align="center" width="500" >
+                                        <tr></tr>
+                                            <tr>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-1/">Lunes</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-2/">Martes</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-3/">Mi&eacute;rcoles</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-4/">Jueves</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-5/">Viernes</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-6/">Sabado</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/d2-7/">Domingo</a></td>
+                                            </tr>
+                                            <tr></tr>
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if(isset($dia2) and $dia2==1){ ?> 
+                       <article id="articlecentroad1">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Grupos Disponibles para este dia</h5>
+                              
+                              <div id="centro1">
+                                        <table align="center" width="800" >
+                                        <tr>
+                                            <th>Folio</th><th>Docente</th><th>D&iacute;a</th><th>Horario</th><th>Aula</th><th>Laboratorio</th><th>H.Laboratorio</th><th>Estado</th><th align="center">Acciones</th>
+                                        </tr>
+                                        <?php for($i=0;$i<sizeof($consultadia); $i++){ ?>
+                                        <tr>
+                                            <td><?php echo $consultadia[$i]["cve_grupo"];?></td>
+                                            <td><?php echo $consultadia[$i]["nombre_maes"]; echo " "; echo $consultadia[$i]["apellido_maes"];?> </td>
+                                            <td><?php echo $consultadia[$i]["dia"];?></td>
+                                            <td><?php echo $consultadia[$i]["nom_hora"];?></td>
+                                            <td><?php echo $consultadia[$i]["nombre_au"];?> Edif. <?php echo $consultadia[$i]["edificio_au"];?> </td>
+                                            <td><?php echo $consultadia[$i]["nombre_lab"];?></td>
+                                            <td><?php echo $consultadia[$i]["horario_ini"]; echo " - "; echo $consultadia[$i]["horario_fin"];?></td>
+                                            <td><?php if($consultadia[$i]["estado"]==1){echo "Abierto";}else{echo "Cerrado";}?>    </td>
+                                            <td>
+                                                <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-3/cv-<?php echo $consultadia[$i]["cve_grupo"];?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/ver_grupo.png" border="0" alt="ver_grupo" title="Entrar al Grupo" />
+                                                </a>
+                                                
+                                                <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-4/cv-<?php echo $consultadia[$i]["cve_grupo"];?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/sesactivar_grupo.png" border="0" alt="desactivar_grupo" title="Cerrar Grupo" />
+                                                </a>
+                                                
+                                                <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-5/cv-<?php echo $consultadia[$i]["cve_grupo"];?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/eliminar.png" border="0" alt="eliminar_grupo" title="Eliminar Grupo" />
+                                                </a>
+
+                                                <form method="POST" action="">
+                                                <input type="image" src="<?php echo Conectar::ruta();?>/images/iconos_sistema/16 (Acrobat).ico" title="Ver Grupos"  />
+                                                <input type="hidden" name="fec" value="<?php echo $consultadia[$i]["fecha_gpo"]; ?>" />
+                                                <input type="hidden" name="cv_g" value="<?php echo $consultadia[$i]["cve_grupo"] ; ?>" />
+                                               </form>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                        
+                                        <?php if(isset($_POST["fec"] )){  ?>
+                                        <tr id="tituloes">
+                                            <th colspan="9" align="center">Formato de Fechas para los Modulos :: clave del grupo:: <?php echo $_POST["cv_g"] ;  ?></th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Modulo</td><td>Semanas</td><td>Fecha Inicio</td><td>Fecha Termino</td>
+                                        </tr>
+                                        
+                                        
+                                        <?php
+
+                                            $fechauno = $_POST["fec"];
+                                            $fecha_hoy = date("d-m-Y");
+                                            list($di1,$me1,$an1) = explode('-',$fecha_hoy);
+                                            function dameFecha($fecha,$dia)
+                                            	{   list($day,$mon,$year) = explode('-',$fecha);
+                                            	    return date('d-m-Y',mktime(0,0,0,$mon,$day+$dia,$year));       
+                                            	}
+                                            
+                                            
+                                            $ultimo=dameFecha($fechauno,623);
+                                            
+                                            $fechados = $ultimo;
+                                            
+                                            $fechaaamostar = $fechauno;
+                                            $a=1;
+                                                while(strtotime($fechados) >= strtotime($fechauno))
+                                                {
+                                                    if(strtotime($fechados) != strtotime($fechaaamostar))
+                                                    {
+
+                                                         if($a==8){   $a1="$fechaaamostar<br />";   } 
+                                                         if($a==22){  $a2="$fechaaamostar<br />";  }
+                                                         if($a==29){  $a3="$fechaaamostar<br />";   }
+                                                         if($a==106){ $a4="$fechaaamostar<br />";  }
+                                                         if($a==113){ $a5="$fechaaamostar<br />"; }
+                                                         if($a==162){ $a6="$fechaaamostar<br />";   }
+                                                         if($a==169){ $a7="$fechaaamostar<br />";  }            
+                                                         if($a==260){ $a8="$fechaaamostar<br />";   }
+                                                         if($a==267){ $a9="$fechaaamostar<br />";     }
+                                                         if($a==288){ $a10="$fechaaamostar<br />";   }
+                                                         if($a==295){ $a11="$fechaaamostar<br />";    }
+                                                         if($a==344){ $a12="$fechaaamostar<br />";   }
+                                                         if($a==351){ $a13="$fechaaamostar<br />";  }
+                                                         if($a==379){ $a14="$fechaaamostar<br />"; }
+                                                         if($a==386){ $a15="$fechaaamostar<br />";   }
+                                                         if($a==435){ $a16="$fechaaamostar<br />";    }
+                                                         if($a==442){ $a17="$fechaaamostar<br />";   }
+                                                         if($a==491){ $a18="$fechaaamostar<br />";    }
+                                                         if($a==498){ $a19="$fechaaamostar<br />";   }
+                                                         if($a==547){ $a20="$fechaaamostar<br />";    }
+                                                         if($a==554){ $a21="$fechaaamostar<br />";   }
+                                                         if($a==603){ $a22="$fechaaamostar<br />";   }
+                                                         if($a==610){ $a23="$fechaaamostar<br />";   }
+                                                         if($a==624){ $a24="$fechaaamostar<br />";    }
+                                                         $fechaaamostar = date("d-m-Y", strtotime($fechaaamostar . " + 1 day"));
+                                                         if($fechaaamostar==$fecha_hoy){ $acum=$a;}
+                                                    $a++;    
+                                                    }
+                                                    else
+                                                    {
+                                                        $a24="$fechaaamostar<br />";
+                                                        break;
+                                                    }
+                                                }
+
+                                               ?>
+                                        
+                                        
+                                        <tr>
+                                            <td colspan="5">Introduccion a la informatica</td><td>1</td><td><?php echo $fechauno;?></td><td><?php echo $fechauno;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Windows 7</td><td>3</td><td><?php
+                                            if($acum>= 1 and $acum<=21){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a1;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a1;
+                                            } ?></td><td><?php
+                                            if($acum>= 22 and $acum<=28){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a2;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a2;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Word 2010</td><td>12</td><td><?php
+                                            if($acum>= 29 and $acum<=105){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a3;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a3;
+                                            } ?></td><td><?php
+                                            if($acum>= 106 and $acum<=112){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a4;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a4;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Power Point 2010</td><td>8</td><td><?php
+                                            if($acum>= 113 and $acum<=161){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a5;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a5;
+                                            } ?></td><td><?php
+                                            if($acum>= 162 and $acum<=168){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a6;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a6;
+                                            } ?></td>
+                                        </tr>
+                                         <tr>
+                                            <td colspan="5">Excel 2010</td><td>14</td>
+                                            <td>
+                                            
+                                            <?php 
+                                            if($acum>= 169 and $acum<=259){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a7;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a7;
+                                            } ?>
+                                            
+                                            </td>
+                                            <td>
+                                            <?php
+                                            if($acum>= 260 and $acum<=266){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a8;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a8;
+                                            } ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Redes E Internet</td><td>4</td>
+                                            <td>
+                                            
+                                            <?php
+                                           if($acum>= 267 and $acum<=287){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a9;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a9;
+                                            } ?>                                            
+                                                                                        
+                                            </td>
+                                            <td><?php
+                                            if($acum>= 288 and $acum<=294){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a10;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a10;
+                                            } ?>  </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Acces 2010</td><td>8</td><td><?php
+                                            if($acum>= 295 and $acum<=343){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a11;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a11;
+                                            } ?>  </td><td><?php
+                                            if($acum>= 344 and $acum<=350){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a12;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a12;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Publisher 2010</td><td>5</td><td><?php
+                                            if($acum>= 351 and $acum<=378){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a13;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a13;
+                                            } ?></td><td><?php
+                                            if($acum>= 379 and $acum<=385){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a14;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a14;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Corel Draw</td><td>8</td><td><?php
+                                            if($acum>= 386 and $acum<=434){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a15;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a15;
+                                            } ?></td><td><?php
+                                           if($acum>= 435 and $acum<=441){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a16;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a16;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Flash</td><td>8</td><td><?php
+                                            if($acum>= 442 and $acum<=490){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a17;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a17;
+                                            } ?></td><td><?php
+                                            if($acum>= 491 and $acum<=497){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a18;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a18;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Dream Weaber</td><td>8</td><td><?php
+                                            if($acum>= 498 and $acum<=546){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a19;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a19;
+                                            } ?></td><td><?php
+                                            if($acum>= 547 and $acum<=553){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a20;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a20;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Visual Basic, Java, php, C#.</td><td>8</td><td><?php
+                                           if($acum>=554 and $acum<=602){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a21;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a21;
+                                            } ?></td><td><?php
+                                            if($acum>= 603 and $acum<=609){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a22;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a22;
+                                            } ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">Ensamble de pc, repaso de office</td><td>3</td><td><?php
+                                            if($acum>= 610 and $acum<=623){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a23;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a23;
+                                            } ?></td><td><?php
+                                            if($acum>= 624){
+                                              ?>
+                                              <p style="color: green;"> <?php  echo $a24;?></p>
+                                              <?php  
+                                            }else{
+                                            echo $a24;
+                                            } ?></td>
+                                        </tr>
+                                       <?php } ?> 
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if($e==1){ ?> 
+                       <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Asignar un nuevo grupo</h5>
+                              
+                                    <div id="centro">
+                                    <br />
+                                 
+                                    <?php $x=0;?>
+                                        <table align="center" width="400">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="7" style="color: black; font-weight: bold;">Seleccione el D&iacute;a</td>
+                                            </tr>
+                                            <tr></tr>
+                                            <tr>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-1/">Lunes</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-2/">Martes</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-3/">Mi&eacute;rcoles</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-4/">Jueves</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-5/">Viernes</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-6/">Sabado</a></td>
+                                            <td><a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-7/">Domingo</a></td>
+                                            </tr>
+                                            <tr></tr>
+                                        </table>     
+                                      
+                                      <?php if(isset($va) and $va==1){?>
+                                        <table align="center" width="400">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="3" style="color: black; font-weight: bold;">Seleccione el Horario para el d&iacute;a :: <?php if(isset($_SESSION["dia_cve"])){ echo $_SESSION["dia"];}  ?> ::</td>
+                                            </tr>
+                                            
+                                            <?php $contador=0;
+                                             for($i=0;$i<sizeof($consulta_hora); $i++)
+                                                {
+                                                    if($contador==0)
+                                                    {
+                                            ?>
+                                            <tr align="center">
+                                            <?php   } $contador++; ?>
+                                                <td> <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $consulta_hora[$i]["cve_hora"]; ?>/"><?php echo $consulta_hora[$i]["nom_hora"];  ?></a></td>
+                                            <?php if($contador==3)
+                                                    {
+                                                        $contador=0;
+                                            ?>    
+                                            </tr>
+                                            <?php   }?>
+                                            <?php } ?>
+                                        </table>
+                                      <?php } ?> 
+                                      
+                                       <?php if(isset($va) and $va==2){?>
+                                        <table align="center" width="400">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="3" style="color: black; font-weight: bold;">Seleccione el Horario para el d&iacute;a :: <?php if(isset($_SESSION["dia_cve"])){ echo $_SESSION["dia"];}  ?> ::</td>
+                                            </tr>
+                                            
+                                            <?php $contador=0;
+                                             for($i=0;$i<sizeof($consulta_hora2); $i++)
+                                                {
+                                                    if($contador==0)
+                                                    {
+                                            ?>
+                                            <tr align="center">
+                                            <?php   } $contador++; ?>
+                                                <td> <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $consulta_hora2[$i]["cve_hora2"]; ?>/"><?php echo $consulta_hora2[$i]["nom_hora2"];  ?></a></td>
+                                            <?php if($contador==3)
+                                                    {
+                                                        $contador=0;
+                                            ?>    
+                                            </tr>
+                                            <?php   }?>
+                                            <?php } ?>
+                                        </table>
+                                      <?php } ?> 
+                                      
+                            <?php if(isset($h) and $h!=null){  
+                                
+                              ?> 
+                              <br /><br />
+                                        <table align="center" width="400">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="3" style="color: black; font-weight: bold;">Seleccione el Maestro para el Horario :: <?php if(isset($_SESSION["cve"])){ echo $_SESSION["cve2"];}  ?> ::  </td>
+                                            </tr>
+                                            <tr style="color: black;">
+                                                <td>Nombre</td><td>Apellidos</td><td>Asignar Maestro</td>
+                                            </tr>
+                   
+                                            
+                                            <?php if($con==1){ $acc=0; $acs=0; 
+                                            for($k=0;$k<sizeof($consulta_maes_grupo2); $k++){$_SESSION["url2"]=count($consulta_maes_grupo2);} 
+                                                
+                                            
+                                            for($i=0;$i<sizeof($consulta_maes_grupo2); $i++)
+                                            {   
+                                            
+                                            if($acc!=$consulta_maes_grupo2[$i]["cve_maes"] and $acs==0)
+                                            {    
+                                                  if($i==0)
+                                                  {
+                                                    $acc=$acc+$consulta_maes_grupo2[$i]["cve_maes"];
+                                                  } 
+                                               
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $consulta_maes_grupo2[$i]["nombre_maes"]; ?></td><td><?php echo $consulta_maes_grupo2[$i]["apellido_maes"]; ?></td>
+                                                <td align="center">
+                                                 <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $consulta_maes_grupo2[$i]["cve_maes"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/asignar.png" border="0" alt="Tomar Foto" title=" 'Error' Usuario con Foto" />
+                                                 </a>
+                                                </td>
+                                            </tr>
+                                            <?php }else{ $acs=1; }            
+                                             }
+                                             }?>
+                                            
+                                                                                                                                    
+                                            <?php if($con==2){ for($i=0;$i<sizeof($consulta_maestro_ge); $i++){ ?>
+                                            <tr>
+                                                <td><?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["apellido_maes"]; ?></td>
+                                                <td align="center">
+                                                 <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $consulta_maestro_ge[$i]["cve_maes"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/asignar.png" border="0" alt="Tomar Foto" title=" 'Error' Usuario con Foto" />
+                                                 </a>
+                                                </td>
+                                            </tr>
+                                            <?php } } ?>
+                                            
+                                            
+                                            
+                                            <?php if($con==3){ $acc=0; $acs=0; 
+                                            for($k=0;$k<sizeof($consulta_maes_grupo2); $k++){$_SESSION["url2"]=count($consulta_maes_grupo2);} 
+                                                
+                                            
+                                            for($i=0;$i<sizeof($consulta_maes_grupo2); $i++)
+                                            {   
+                                            
+                                            if($acc!=$consulta_maes_grupo2[$i]["cve_maes"] and $acs==0)
+                                            {    
+                                                  if($i==0)
+                                                  {
+                                                    $acc=$acc+$consulta_maes_grupo2[$i]["cve_maes"];
+                                                  }                            
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $consulta_maes_grupo2[$i]["nombre_maes"]; ?></td><td><?php echo $consulta_maes_grupo2[$i]["apellido_maes"]; ?></td>
+                                                <td align="center">
+                                                 <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $consulta_maes_grupo2[$i]["cve_maes"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/asignar.png" border="0" alt="Tomar Foto" title=" 'Error' Usuario con Foto" />
+                                                 </a>
+                                                </td>
+                                            </tr>
+                                            <?php }else{ $acs=1; }            
+                                             }
+                                             }?>
+                                             
+                                             <?php if($con==4){ $acc=0; $acs=0; 
+                                            for($k=0;$k<sizeof($consulta_maestro_ge); $k++){$_SESSION["url2"]=count($consulta_maestro_ge);} 
+                                                
+                                            
+                                            for($i=0;$i<sizeof($consulta_maestro_ge); $i++)
+                                            {   
+                                            
+                                            if($acc!=$consulta_maestro_ge[$i]["cve_maes"] and $acs==0)
+                                            {    
+                                                  if($i==0)
+                                                  {
+                                                    $acc=$acc+$consulta_maestro_ge[$i]["cve_maes"];
+                                                  } 
+                                               
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $consulta_maestro_ge[$i]["nombre_maes"]; ?></td><td><?php echo $consulta_maestro_ge[$i]["apellido_maes"]; ?></td>
+                                                <td align="center">
+                                                 <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $consulta_maestro_ge[$i]["cve_maes"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/asignar.png" border="0" alt="Tomar Foto" title=" 'Error' Usuario con Foto" />
+                                                 </a>
+                                                </td>
+                                            </tr>
+                                            <?php }else{ $acs=1; }            
+                                             }
+                                             }?>
+                                             
+                                           
+                                        </table>
+                              <?php } ?>
+                              
+                              
+                              <?php if(isset($m) and $m!=null){  
+                                
+                              ?> 
+                              <br /><br />
+                                        <table align="center" width="400">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="3" style="color: black; font-weight: bold;">Seleccione el Aula para el Maestro :: <?php  for($i=0;$i<sizeof($consulta_es); $i++){ $_SESSION["maes"]=$consulta_es[$i]["cve_maes"]; echo $consulta_es[$i]["nombre_maes"]; echo " ";  echo $consulta_es[$i]["apellido_maes"];  }   ?>  </td>
+                                            </tr>
+                                            
+                                            <?php if($con2==1){?>
+                                                
+                                            <?php $contador=0;
+                                             for($i=0;$i<sizeof($cve_aula2); $i++)
+                                                {
+                                                    if($contador==0)
+                                                    {
+                                            ?>
+                                            <tr align="center">
+                                            <?php   } $contador++; ?>
+                                                <td> <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $_GET["maes"]; ?>/a-<?php echo $cve_aula2[$i]["cve_au"]; ?>/"><?php echo $cve_aula2[$i]["nombre_au"];  ?></a></td>
+                                            <?php if($contador==3)
+                                                    {
+                                                        $contador=0;
+                                            ?>    
+                                            </tr>
+                                            <?php   }}?>
+                                                
+                                           <?php }?>
+                                           
+                                           <?php if($con2==0){ for($i=0;$i<sizeof($consulta_au_ge); $i++){ }?>
+                                            
+                                            <?php $contador=0;
+                                             for($i=0;$i<sizeof($consulta_au_ge); $i++)
+                                                {
+                                                    if($contador==0)
+                                                    {
+                                            ?>
+                                            <tr align="center">
+                                            <?php   } $contador++; ?>
+                                                <td> <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $_GET["maes"]; ?>/a-<?php echo $consulta_au_ge[$i]["cve_au"]; ?>/"><?php echo $consulta_au_ge[$i]["nombre_au"];  ?></a></td>
+                                            <?php if($contador==3)
+                                                    {
+                                                        $contador=0;
+                                            ?>    
+                                            </tr>
+                                            <?php   }}?>    
+                                              
+                                                
+                                           <?php }?>
+                                            
+                                            
+                                        </table>
+
+                              <?php } ?>
+                              
+                               <?php if(isset($a) and $a!=null){  ?>
+                               
+                                        <br /><br />
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="6" style="color: black; font-weight: bold;">Seleccione el Laboratorio.  Aula seleccionada :: <?php  for($i=0;$i<sizeof($nombre_au); $i++){ $_SESSION["cve_au"]=$nombre_au[$i]["cve_au"]; echo $nombre_au[$i]["nombre_au"]; echo " ";  }   ?> ::  </td>
+                                            </tr>
+                                            
+                                            <?php for($i=0;$i<sizeof($consulta_lab);$i++){
+                                                
+                                               if($contador==0)
+                                                    {
+                                            ?>
+                                            <tr align="center">
+                                            <?php   } $contador++; ?>
+                                                <td> <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $_GET["maes"]; ?>/a-<?php echo $_GET["au"]; ?>/l-<?php echo $consulta_lab[$i]["cve_lab"]; ?>/" title="Capacidad ::  <?php echo $consulta_lab[$i]["capacidad_lab"]; ?> :: Alumnos "><?php echo $consulta_lab[$i]["nombre_lab"];  ?></a></td>
+                                            <?php if($contador==3)
+                                                   {
+                                                        $contador=0;
+                                            ?>    
+                                            </tr>
+                                            <?php   }}?>     
+                                        </table>    
+                                 
+                               <?php } ?> 
+                               
+                               <?php if(isset($l) and $l!=null){  ?>
+                               
+                                        <br /><br />
+                                        <table align="center">
+                                            <tr style="background: silver;">
+                                                <td align="center" colspan="6" style="color: black; font-weight: bold;">Horarios Disponibleas para el laboratorio :: <?php  for($g=0;$g<sizeof($con_la_es); $g++){ $_SESSION["cve_lab"]=$con_la_es[$g]["cve_lab"]; echo $con_la_es[$g]["nombre_lab"]; echo " ";  }   ?> ::  </td>
+                                            </tr>
+                                          <?php 
+                                          if($consu_horario_lab==null)
+                                          { 
+                                            for($i=0;$i<=count($lab_horarios)-1;$i++)
+                                                     {?>
+                                                        <tr>
+                                                         <td> 
+                                                            <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $_GET["maes"]; ?>/a-<?php echo $_GET["au"]; ?>/l-<?php echo $_GET["lab"]; ?>/hl-<?php echo $lab_horarios[$i]["cve_h_l"]; ?>/">
+                                                             <?php echo $lab_horarios[$i]["horario_ini"]; echo " "; echo $lab_horarios[$i]["horario_fin"]; echo "<br>"; ?> 
+                                                            </a>
+                                                         </td>
+                                                        </tr>     
+                                                        
+                                                        
+                                                     <?php }
+                                          }
+                                          
+                                          for($j=0;$j<sizeof($consu_horario_lab); $j++)
+                                          {
+                                            if($j+1==1){ $v_1=$consu_horario_lab[0]["cve_horarios_lab"];}
+                                            if($j+1==2){ $v_1=$consu_horario_lab[0]["cve_horarios_lab"]; $v_2=$consu_horario_lab[1]["cve_horarios_lab"];}
+                                          
+                                          
+                                          
+                                          if($j+1==count($consu_horario_lab))
+                                              { 
+                                                if($j+1==1){ 
+                                                 for($i=0;$i<=count($lab_horarios)-1;$i++)
+                                                     {
+                                                        if($v_1!=$lab_horarios[$i]["cve_h_l"])
+                                                        {
+                                                            
+                                                ?>
+                                                        <tr>
+                                                         <td> 
+                                                            <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $_GET["maes"]; ?>/a-<?php echo $_GET["au"]; ?>/l-<?php echo $_GET["lab"]; ?>/hl-<?php echo $lab_horarios[$i]["cve_h_l"]; ?>/">
+                                                             <?php echo $lab_horarios[$i]["horario_ini"]; echo " "; echo $lab_horarios[$i]["horario_fin"]; echo "<br>"; ?> 
+                                                            </a>
+                                                         </td>
+                                                        </tr>
+                                              <?php } }
+                                              }}
+                                          
+                                          
+                                            
+                                            if($j+1==count($consu_horario_lab))
+                                              {  
+                                                if($j+1==2){ 
+                                                    
+                                                 for($i=0;$i<=count($lab_horarios)-1;$i++)
+                                                     {
+                                                        $r=0;
+                                                        if($v_1!=$lab_horarios[$i]["cve_h_l"] and $v_2!=$lab_horarios[$i]["cve_h_l"])
+                                                        {
+                                                        $r=1;   
+                                                ?>
+                                                        <tr>
+                                                         <td> 
+                                                            <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-1/d-<?php echo $_GET["dia"]; ?>/h-<?php echo $_GET["hora"]; ?>/m-<?php echo $_GET["maes"]; ?>/a-<?php echo $_GET["au"]; ?>/l-<?php echo $_GET["lab"]; ?>/hl-<?php echo $lab_horarios[$i]["cve_h_l"]; ?>/">
+                                                             <?php echo $lab_horarios[$i]["horario_ini"]; echo " "; echo $lab_horarios[$i]["horario_fin"]; echo "<br>"; ?> 
+                                                            </a>
+                                                         </td>
+                                                        </tr>
+                                              <?php } if($r==0 and $i+1==count($consu_horario_lab)){ ?> <tr><td>No hay Horarios para este laboratorio. &nbsp; Seleccione otro!!!</td></tr>  <?php }
+                                                            }
+                                              }}
+                                          }
+                                                ?>   
+                                        </table>    
+                                 
+                               <?php } ?>          
+                                        
+                                        
+                                    
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+             
+              <?php if($e==3){ ?> 
+                      <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Registro de alumnos para este grupo clave (<?php echo $_GET["clave"]; ?>)</h5>
+                              
+                                    <div id="centro">
+                                        <table width="600">
+                                            <tr align="center">
+                                                <th>Num:</th><th>Matricula.</th><th>Nombre(s).</th><th>Apellidos</th><th>Ver M&aacute;s</th>
+                                            </tr>
+                                         <?php for($g=0;$g<sizeof($con_al_gpo); $g++){?>
+                                         <tr align="center">
+                                            <td><?php echo $g+1;?></td>
+                                            <td><?php echo $con_al_gpo[$g]["matricula"]; ?></td>
+                                            <td><?php echo $con_al_gpo[$g]["nombre_alum"];?></td>
+                                            <td><?php echo $con_al_gpo[$g]["apellidos_al"];?></td>
+                                            <td align="center">
+                                                    <a href="<?php echo Conectar::ruta(); ?>c-alumnos/e-2/v-<?php echo $con_al_gpo[$g]["cve_alum"]; ?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>images/iconos_sistema/ver_mas.jpg" border="0" alt="Tomar Foto" title="ver mas" width="32" height="32" />
+                                                    </a>                                                                                                   
+                                                </td>                                            
+                                         </tr>
+                                         <?php  } ?>
+                                         <tr>
+                                            <td colspan="4"><input type="hidden" name="cc" /><input type="submit" value="Aceptar" /></td>
+                                         </tr>
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if($e==4){ ?>
+                      <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Modulo para Cerrar un Grupo</h5>
+                              
+                                    <div id="centro">
+                                    <form method="POST" action="">
+                                        <table width="600">
+                                            <tr align="center">
+                                                <th>Folio de grupo </th><th>Nombre del Maestro A Cargo</th><th>Estado</th><th>Accion</th>
+                                            </tr>
+                                         
+                                         <tr align="center">
+                                            <td><?php echo $consul_g[0]["cve_grupo"];?><input type="hidden" name="cve_grupo" value="<?php echo $consul_g[0]["cve_grupo"];?>" /> </td>
+                                            <td><?php echo $consul_g[0]["nombre_maes"]; echo" "; echo $consul_g[0]["apellido_maes"];  ?></td>
+                                            <td style="color: green;"><?php if($consul_g[0]["estado"]==1){echo "Abierto";}else{echo "Cerrado";} ?></td>
+                                            <td><input type="hidden" name="dia" value="<?php echo $consul_g[0]["dia"];?>" /> <input type="radio" name="es" value="1" checked="" />Abrir<input type="radio" name="es" value="0"  />Cerrar</td>
+                                         </tr>
+                                         <tr>
+                                            <td colspan="4"><input type="hidden" name="cc" /><input type="submit" value="Aceptar" /></td>
+                                         </tr>
+                                        </table>
+                                        </form>
+                                        
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if($e==5){ ?> 
+                      <article id="articlecentroad">
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Modulo para Eliminar un Grupo</h5>
+                              
+                                    <div id="centro">
+                                    <form name="cerrarg" method="POST" action="">
+                                        <table width="600">
+                                            <tr align="center">
+                                                <th>Folio de grupo</th><th>Nombre del Maestro A Cargo</th><th>Estado</th><th>Accion</th>
+                                            </tr>
+                                         
+                                         <tr align="center">
+                                            <td><input type="hidden" name="cve_grupo" value="<?php echo $consul_g[0]["cve_grupo"];?>" /><?php echo $consul_g[0]["cve_grupo"];?></td>
+                                            <td><?php echo $consul_g[0]["nombre_maes"]; echo" "; echo $consul_g[0]["apellido_maes"];  ?></td>
+                                            <td style="color: green;"><?php if($consul_g[0]["status_gpo"]==1){echo "Activo";}?></td>
+                                            <td><input type="hidden" name="dia" value="<?php echo $consul_g[0]["dia"];?>" /> <input type="radio" name="es" value="0" />Desactivar</td>
+                                         </tr>
+                                         <tr>
+                                            <td colspan="4"><input type="hidden" name="eg" /><input type="submit" value="Aceptar" /></td>
+                                         </tr>
+                                         
+                                        </table>
+                                        </form> 
+                                        
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   <?php if($e==6){ ?> 
+                       <article id="articlecentroad1">
+                         
+                         <div id="culumnacentromaestro">
+                            <h5 id="tituloes">Modulo Consultar grupos Abiertos..</h5>
+                              
+                              <div id="centro1">
+                                        <table align="center" width="800" >
+                                        <tr>
+                                            <th>Folio</th><th>Docente</th><th>D&iacute;a</th><th>Horario</th><th>Aula</th><th>Laboratorio</th><th>H.Laboratorio</th><th>Estado</th><th align="center">Acciones</th>
+                                        </tr>
+                                        <?php for($i=0;$i<sizeof($consultadia); $i++){ ?>
+                                        <tr>
+                                            <td><?php echo $consultadia[$i]["cve_grupo"];?></td>
+                                            <td><?php echo $consultadia[$i]["nombre_maes"]; echo " "; echo $consultadia[$i]["apellido_maes"];?> </td>
+                                            <td><?php echo $consultadia[$i]["dia"];?></td>
+                                            <td><?php echo $consultadia[$i]["nom_hora"];?></td>
+                                            <td><?php echo $consultadia[$i]["nombre_au"];?> Edif. <?php echo $consultadia[$i]["edificio_au"];?> </td>
+                                            <td><?php echo $consultadia[$i]["nombre_lab"];?></td>
+                                            <td><?php echo $consultadia[$i]["horario_ini"]; echo " - "; echo $consultadia[$i]["horario_fin"];?></td>
+                                            <td style="color: green;"><?php if($consultadia[$i]["estado"]==1){echo "Abierto";}else{echo "Cerrado";}?>    </td>
+                                            <td>
+                                                <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-3/cv-<?php echo $consultadia[$i]["cve_grupo"];?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/ver_grupo.png" border="0" alt="ver_grupo" title="Entrar al Grupo" />
+                                                </a>
+                                                
+                                                <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-4/cv-<?php echo $consultadia[$i]["cve_grupo"];?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/sesactivar_grupo.png" border="0" alt="desactivar_grupo" title="Cerrar Grupo" />
+                                                </a>
+                                                
+                                                <a href="<?php echo Conectar::ruta(); ?>c-grupos/e-5/cv-<?php echo $consultadia[$i]["cve_grupo"];?>/">
+                                                    <img src="<?php echo Conectar::ruta();?>/images/iconos_sistema/eliminar.png" border="0" alt="eliminar_grupo" title="Eliminar Grupo" />
+                                                </a>
+                                            
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                        </table>
+                                    
+                                    </div>
+                                    
+                                    
+                         </div>
+                         
+                       </article>
+                   <?php } ?>
+                   
+                   
+                             
+             
+             
+             
+                  </section>
+            </section>
+        
+        </div>
+       <footer>
+            <?php
+                include("footer.phtml");
+             ?>
+        </footer>
+        
+        
+    </body>
+</html>
+<?php } else{ header("location:".Conectar::ruta()."c-home/"); }?>
